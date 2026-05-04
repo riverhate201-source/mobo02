@@ -2261,6 +2261,138 @@ body.dark-mode .toggle-switch input:checked+.toggle-slider {
 }
 
 
+/* ======================================================
+   🔥 일괄 추가 바둑판 UI 스타일 (라이트 모드 기본)
+====================================================== */
+#batch-add-section {
+    margin-bottom: 15px;
+}
+
+.batch-desc {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.batch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 4px;
+    padding-bottom: 5px;
+}
+
+.batch-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #555;
+    display: block;
+    /* 텍스트 에어리어랑 줄바꿈되도록 */
+    margin-bottom: 4px;
+}
+
+.batch-textarea {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    padding: 6px;
+    font-size: 12px;
+    resize: none;
+    /* 유저가 크기 조절 못하게 막기 */
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+    font-family: inherit;
+}
+
+.batch-textarea:focus {
+    outline: none;
+    border-color: #1967d2;
+    /* 클릭하면 파란색 테두리 */
+}
+
+/* 10일 연재 전용 스타일 */
+.batch-label-10day {
+    color: #333;
+}
+
+.batch-textarea-10day {
+    border: 1px solid #27ae60;
+    background-color: #f0fdf4;
+}
+
+/* 격주 연재 전용 스타일 */
+.batch-span-2 {
+    grid-column: span 2;
+}
+
+.batch-label-biweekly {
+    color: #333;
+}
+
+.batch-textarea-biweekly {
+    border: 1px solid #e67e22;
+    background-color: #fff8f2;
+}
+
+.batch-footer-desc {
+    font-size: 11px;
+    color: #888;
+    margin: 8px 0 0 0;
+    line-height: 1.4;
+}
+
+
+/* ======================================================
+   🌙 다크 모드 (Dark Mode) 일괄 추가 UI 스타일
+====================================================== */
+body.dark-mode .batch-desc {
+    color: #ddd;
+}
+
+body.dark-mode .batch-label {
+    color: #bbb;
+}
+
+body.dark-mode .batch-textarea {
+    background-color: #2c2c2e;
+    /* 다크모드용 어두운 메모장 배경 */
+    border-color: #444;
+    color: #eee;
+}
+
+body.dark-mode .batch-textarea:focus {
+    border-color: #eee;
+    /* 다크모드용 밝은 파란색 포커스 */
+}
+
+/* 10일 연재 전용 다크모드 스타일 */
+body.dark-mode .batch-label-10day {
+    color: #eee;
+    /* 눈에 띄게 살짝 더 밝은 초록 */
+}
+
+body.dark-mode .batch-textarea-10day {
+    background-color: #1a2f24;
+    /* 아주 어두운 초록 틴트 배경 */
+    border-color: #27ae60;
+}
+
+/* 격주 연재 전용 다크모드 스타일 */
+body.dark-mode .batch-label-biweekly {
+    color: #eee;
+    /* 눈에 띄게 살짝 더 밝은 주황 */
+}
+
+body.dark-mode .batch-textarea-biweekly {
+    background-color: #33261a;
+    /* 아주 어두운 주황 틴트 배경 */
+    border-color: #e67e22;
+}
+
 /* 애플(iOS/iPadOS) 강제 파란색 링크(데이터 탐지) 영구 박멸! */
 a[x-apple-data-detectors] {
     color: inherit !important;

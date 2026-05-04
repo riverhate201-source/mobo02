@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="mobo">
-    <link rel="stylesheet" href="./css/style.css?v=2.6">
+    <link rel="stylesheet" href="./css/style.css?v=2.7">
 
 
 
@@ -357,62 +357,58 @@
                     일괄 추가</button>
             </div>
 
-            <!-- 🔥 [범인 검거 완료!] ID가 지워졌던 바둑판 전체 컨테이너 복구 -->
-            <div id="batch-add-section" style="display: none; margin-bottom: 15px;">
-                <p style="font-size: 12px; color: #1967d2; margin-bottom: 10px; font-weight: bold;">🔥 각 요일별 칸에 작품 제목을
-                    적어주세요! (쉼표나 엔터로 구분)</p>
+            <!-- 🌟 요일별 일괄 추가 바둑판 (CSS 클래스 적용 완료!) -->
+            <div id="batch-add-section" style="display: none;">
+                <p class="batch-desc">각 요일별 칸에 작품 제목을 적어주세요! (쉼표나 엔터로 구분)</p>
 
-                <!-- 🌟 스크롤바 숨김 클래스는 요 안쪽 그리드 상자에 안전하게 부여! -->
-                <div class="hide-scrollbar"
-                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 4px; padding-bottom: 5px; scrollbar-width: none; -ms-overflow-style: none;">
+                <!-- 바둑판 Grid 영역 -->
+                <div class="hide-scrollbar batch-grid">
                     <div>
-                        <label style="font-size: 11px; font-weight: bold; color: #555;">월요일</label>
-                        <textarea id="batch-input-월요일" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #ddd; padding: 6px; font-size: 12px; resize: none;"></textarea>
+                        <label class="batch-label">월요일</label>
+                        <textarea id="batch-input-월요일" rows="2" class="batch-textarea"></textarea>
                     </div>
                     <div>
-                        <label style="font-size: 11px; font-weight: bold; color: #555;">화요일</label>
-                        <textarea id="batch-input-화요일" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #ddd; padding: 6px; font-size: 12px; resize: none;"></textarea>
+                        <label class="batch-label">화요일</label>
+                        <textarea id="batch-input-화요일" rows="2" class="batch-textarea"></textarea>
                     </div>
                     <div>
-                        <label style="font-size: 11px; font-weight: bold; color: #555;">수요일</label>
-                        <textarea id="batch-input-수요일" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #ddd; padding: 6px; font-size: 12px; resize: none;"></textarea>
+                        <label class="batch-label">수요일</label>
+                        <textarea id="batch-input-수요일" rows="2" class="batch-textarea"></textarea>
                     </div>
                     <div>
-                        <label style="font-size: 11px; font-weight: bold; color: #555;">목요일</label>
-                        <textarea id="batch-input-목요일" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #ddd; padding: 6px; font-size: 12px; resize: none;"></textarea>
+                        <label class="batch-label">목요일</label>
+                        <textarea id="batch-input-목요일" rows="2" class="batch-textarea"></textarea>
                     </div>
                     <div>
-                        <label style="font-size: 11px; font-weight: bold; color: #555;">금요일</label>
-                        <textarea id="batch-input-금요일" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #ddd; padding: 6px; font-size: 12px; resize: none;"></textarea>
+                        <label class="batch-label">금요일</label>
+                        <textarea id="batch-input-금요일" rows="2" class="batch-textarea"></textarea>
                     </div>
                     <div>
-                        <label style="font-size: 11px; font-weight: bold; color: #555;">토요일</label>
-                        <textarea id="batch-input-토요일" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #ddd; padding: 6px; font-size: 12px; resize: none;"></textarea>
+                        <label class="batch-label">토요일</label>
+                        <textarea id="batch-input-토요일" rows="2" class="batch-textarea"></textarea>
                     </div>
                     <div>
-                        <label style="font-size: 11px; font-weight: bold; color: #555;">일요일</label>
-                        <textarea id="batch-input-일요일" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #ddd; padding: 6px; font-size: 12px; resize: none;"></textarea>
+                        <label class="batch-label">일요일</label>
+                        <textarea id="batch-input-일요일" rows="2" class="batch-textarea"></textarea>
                     </div>
+
+                    <!-- 특수 요일 (10일 연재) -->
                     <div>
-                        <label style="font-size: 11px; font-weight: bold; color: #27ae60;">10일 연재</label>
+                        <label class="batch-label batch-label-10day">10일 연재</label>
                         <textarea id="batch-input-10일 연재" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #27ae60; padding: 6px; font-size: 12px; resize: none; background: #f0fdf4;"></textarea>
+                            class="batch-textarea batch-textarea-10day"></textarea>
                     </div>
-                    <div style="grid-column: span 2;">
-                        <label style="font-size: 11px; font-weight: bold; color: #e67e22;">격주 연재</label>
+
+                    <!-- 특수 요일 (격주 연재 - 가로로 길게) -->
+                    <div class="batch-span-2">
+                        <label class="batch-label batch-label-biweekly">격주 연재</label>
                         <textarea id="batch-input-격주 연재" rows="2"
-                            style="width: 100%; border-radius: 6px; border: 1px solid #e67e22; padding: 6px; font-size: 12px; resize: none; background: #fff8f2;"></textarea>
+                            class="batch-textarea batch-textarea-biweekly"></textarea>
                     </div>
                 </div>
-                <p style="font-size: 11px; color: #888; margin: 8px 0 0 0; line-height: 1.4;">* 기본 가격과 진도 '1화'로 자동
-                    세팅됩니다. 10일/격주 날짜는 임의설정되며 추후 수정 가능합니다.</p>
+
+                <p class="batch-footer-desc">* 기본 가격(레진/봄툰 3C, 리디 600캐시/미블 500머니)과 진도 '1화'로 자동세팅됩니다. 10일/격주 날짜는 임의설정되며
+                    추후 수정 가능합니다.</p>
             </div>
 
             <!-- 1️⃣ 단일 추가 전용 윗부분 (제목, 링크, 시간) -->
