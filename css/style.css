@@ -2416,8 +2416,8 @@ body.dark-mode .batch-theme-text {
     color: #eee;
 }
 
-/* 🔥 해시태그(칩) 입력창 스타일 */
-.tag-wrapper {
+/* 🔥 해시태그(칩) 겉 포장지 (크기 완벽 고정 & 투명 스크롤) */
+#custom-modal .tag-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
@@ -2426,27 +2426,23 @@ body.dark-mode .batch-theme-text {
     border: 1px solid #ddd;
     padding: 6px;
     height: 75px;
-    /* 🌟 핵심: 기존 textarea 2줄 크기랑 똑같이 높이 꽉 고정! */
+    /* 🔥 세로 크기 75px로 꽉 고정 (뚱뚱해짐 방지!) */
     overflow-y: auto;
-    /* 🌟 핵심: 넘치면 박스가 커지지 않고 안에서 스크롤! */
+    /* 안에서만 투명 스크롤! */
     scrollbar-width: none;
-    /* 파이어폭스 스크롤바 숨김 */
     -ms-overflow-style: none;
-    /* IE/Edge 스크롤바 숨김 */
     background-color: #fff;
     box-sizing: border-box;
     cursor: text;
     align-content: flex-start;
-    /* 🌟 태그들이 중간에 붕 뜨지 않고 위에서부터 차곡차곡 쌓이게 */
     transition: 0.2s;
 }
 
-/* 🌟 크롬/사파리 스크롤바 완벽 숨김 (투명 스크롤) */
-.tag-wrapper::-webkit-scrollbar {
+#custom-modal .tag-wrapper::-webkit-scrollbar {
     display: none;
 }
 
-.tag-wrapper:focus-within {
+#custom-modal .tag-wrapper:focus-within {
     border-color: #1967d2;
     box-shadow: 0 0 0 2px rgba(25, 103, 210, 0.1);
 }
@@ -2487,20 +2483,28 @@ body.dark-mode .batch-theme-text {
     opacity: 1;
 }
 
-/* 🌟 입력창 기본 테두리 완벽 박멸 (important 없이 우선순위 높여서 제압!) */
-#custom-modal #batch-add-section .tag-wrapper .tag-input {
+/* 🌟 입력창(textarea) 가로세로 폭주 완벽 차단! */
+#custom-modal .tag-wrapper .tag-input {
     border: none;
     outline: none;
     background: transparent;
-    border-radius: 0%;
     box-shadow: none;
     flex: 1;
-    min-width: 80px;
+    min-width: 30px;
+    /* 🔥 textarea 기본 가로 고집 꺾기 (가로 팽창 방지!) */
+    max-width: 100%;
     font-size: 12px;
     color: #333;
     padding: 0;
     margin: 0;
     font-family: inherit;
+    resize: none;
+    /* 유저가 크기 조절 못하게 막기 */
+    height: 18px;
+    /* 🔥 한 줄 높이로 꽉 누르기 (세로 팽창 방지!) */
+    line-height: 18px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 @keyframes popIn {
@@ -2529,17 +2533,17 @@ body.dark-mode .batch-theme-text {
 /* ====================================
    🌙 다크모드 대응 (글자색 #eee 통일!)
 ==================================== */
-body.dark-mode .tag-wrapper {
+/* 🌙 다크모드 대응 (important 없이 우선순위로 제압) */
+body.dark-mode #custom-modal .tag-wrapper {
     background-color: #2c2c2e;
     border-color: #444;
 }
 
-body.dark-mode .tag-wrapper:focus-within {
+body.dark-mode #custom-modal .tag-wrapper:focus-within {
     border-color: #8ab4f8;
 }
 
-/* 🌙 다크모드 대응 (여기도 important 없이 깔끔하게!) */
-body.dark-mode #custom-modal #batch-add-section .tag-wrapper .tag-input {
+body.dark-mode #custom-modal .tag-wrapper .tag-input {
     color: #eee;
     background: transparent;
 }
@@ -2562,6 +2566,34 @@ body.dark-mode .tag-wrapper.wrapper-10day {
 body.dark-mode .tag-wrapper.wrapper-biweekly {
     background-color: #33261a;
     border-color: #e67e22;
+}
+
+
+/* 🌟 입력창 기본 테두리 완벽 박멸 + 한 줄처럼 위장! */
+#custom-modal #batch-add-section .tag-wrapper .tag-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    flex: 1;
+    width: 10px;
+    min-width: 30px;
+    font-size: 12px;
+    color: #333;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    /* 🔥 다중줄 입력창(textarea)을 한 줄처럼 보이게 꽉 압축! */
+    resize: none;
+    height: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* 🌙 다크모드 대응 */
+body.dark-mode #custom-modal #batch-add-section .tag-wrapper .tag-input {
+    color: #eee;
+    background: transparent;
 }
 
 /* 애플(iOS/iPadOS) 강제 파란색 링크(데이터 탐지) 영구 박멸! */

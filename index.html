@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="mobo">
-    <link rel="stylesheet" href="./css/style.css?v=2.9">
+    <link rel="stylesheet" href="./css/style.css?v=3.0">
 
 
 
@@ -361,76 +361,78 @@
             <div id="batch-add-section" style="display: none; margin-bottom: 15px;">
                 <p class="batch-guide-text">제목을 적고 엔터, 쉼표, 또는 스페이스바 2번을 누르세요!</p>
 
+                <!-- 🔥 1fr 대신 minmax(0, 1fr)로 바꿔서 바둑판 팽창을 완벽 차단! -->
                 <div class="hide-scrollbar"
-                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 4px; padding-bottom: 5px; scrollbar-width: none; -ms-overflow-style: none;">
-                    <!-- 월~일요일 상자 -->
-                    <div><label class="batch-theme-text"
+                    style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 4px; padding-bottom: 5px; scrollbar-width: none; -ms-overflow-style: none;">
+
+                    <!-- 🔥 각 요일 박스마다 style="min-width: 0;" 을 넣어서 튀어나가는 걸 막았습니다! -->
+                    <div style="min-width: 0;"><label class="batch-theme-text"
                             style="font-size: 12px; padding-right: 8px; font-weight: normal;">월요일</label>
                         <div class="tag-wrapper" onclick="document.getElementById('batch-input-월요일').focus()">
-                            <div id="tag-list-월요일" class="tag-list"></div><input type="text" id="batch-input-월요일"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-월요일" class="tag-list"></div><textarea id="batch-input-월요일"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
-                    <div><label class="batch-theme-text"
+                    <div style="min-width: 0;"><label class="batch-theme-text"
                             style="font-size: 12px; padding-right: 2px; font-weight: normal;">화요일</label>
                         <div class="tag-wrapper" onclick="document.getElementById('batch-input-화요일').focus()">
-                            <div id="tag-list-화요일" class="tag-list"></div><input type="text" id="batch-input-화요일"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-화요일" class="tag-list"></div><textarea id="batch-input-화요일"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
-                    <div><label class="batch-theme-text"
+                    <div style="min-width: 0;"><label class="batch-theme-text"
                             style="font-size: 12px; padding-right: 2px; font-weight: normal;">수요일</label>
                         <div class="tag-wrapper" onclick="document.getElementById('batch-input-수요일').focus()">
-                            <div id="tag-list-수요일" class="tag-list"></div><input type="text" id="batch-input-수요일"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-수요일" class="tag-list"></div><textarea id="batch-input-수요일"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
-                    <div><label class="batch-theme-text"
+                    <div style="min-width: 0;"><label class="batch-theme-text"
                             style="font-size: 12px; padding-right: 2px; font-weight: normal;">목요일</label>
                         <div class="tag-wrapper" onclick="document.getElementById('batch-input-목요일').focus()">
-                            <div id="tag-list-목요일" class="tag-list"></div><input type="text" id="batch-input-목요일"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-목요일" class="tag-list"></div><textarea id="batch-input-목요일"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
-                    <div><label class="batch-theme-text"
+                    <div style="min-width: 0;"><label class="batch-theme-text"
                             style="font-size: 12px; padding-right: 2px; font-weight: normal;">금요일</label>
                         <div class="tag-wrapper" onclick="document.getElementById('batch-input-금요일').focus()">
-                            <div id="tag-list-금요일" class="tag-list"></div><input type="text" id="batch-input-금요일"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-금요일" class="tag-list"></div><textarea id="batch-input-금요일"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
-                    <div><label class="batch-theme-text"
+                    <div style="min-width: 0;"><label class="batch-theme-text"
                             style="font-size: 12px; padding-right: 2px; font-weight: normal;">토요일</label>
                         <div class="tag-wrapper" onclick="document.getElementById('batch-input-토요일').focus()">
-                            <div id="tag-list-토요일" class="tag-list"></div><input type="text" id="batch-input-토요일"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-토요일" class="tag-list"></div><textarea id="batch-input-토요일"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
-                    <div><label class="batch-theme-text"
+                    <div style="min-width: 0;"><label class="batch-theme-text"
                             style="font-size: 12px; padding-right: 2px; font-weight: normal;">일요일</label>
                         <div class="tag-wrapper" onclick="document.getElementById('batch-input-일요일').focus()">
-                            <div id="tag-list-일요일" class="tag-list"></div><input type="text" id="batch-input-일요일"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-일요일" class="tag-list"></div><textarea id="batch-input-일요일"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
 
                     <!-- 특수 요일 상자 -->
-                    <div>
+                    <div style="min-width: 0;">
                         <label class="batch-theme-text"
                             style="font-size: 12px; padding-right: 2px; font-weight: normal;">10일 연재</label>
                         <div class="tag-wrapper wrapper-10day"
                             onclick="document.getElementById('batch-input-10일 연재').focus()">
-                            <div id="tag-list-10일 연재" class="tag-list"></div><input type="text" id="batch-input-10일 연재"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-10일 연재" class="tag-list"></div><textarea id="batch-input-10일 연재"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
-                    <div style="grid-column: span 2;">
+                    <div style="grid-column: span 2; min-width: 0;">
                         <label class="batch-theme-text"
                             style="font-size: 12px; font-weight: normal; padding-right: 2px;">격주 연재</label>
                         <div class="tag-wrapper wrapper-biweekly"
                             onclick="document.getElementById('batch-input-격주 연재').focus()">
-                            <div id="tag-list-격주 연재" class="tag-list"></div><input type="text" id="batch-input-격주 연재"
-                                class="tag-input" placeholder="입력 후 엔터">
+                            <div id="tag-list-격주 연재" class="tag-list"></div><textarea id="batch-input-격주 연재"
+                                class="tag-input" placeholder="입력 후 엔터" rows="1"></textarea>
                         </div>
                     </div>
                 </div>
@@ -1090,7 +1092,7 @@
             }, 10);
         }
 
-        // 🪄 엔터, 쉼표, 더블스페이스, 백스페이스, 복붙 감지 센서 설치!
+        // 🪄 엔터, 쉼표, 더블스페이스, 백스페이스 감지 센서 설치!
         document.addEventListener("DOMContentLoaded", () => {
             const dayList = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일', '10일 연재', '격주 연재'];
             dayList.forEach(day => {
@@ -1098,47 +1100,29 @@
                 const tagList = document.getElementById(`tag-list-${day}`);
                 if (!input || !tagList) return;
 
-                // 1. [키보드 누를 때] 엔터 & 백스페이스 감지
+                // 1. [키보드 누를 때] 폼 제출 방지 및 백스페이스 삭제
                 input.addEventListener('keydown', function (e) {
-                    // 🌟 [방어막 1] 한글 자음/모음이 조합 중일 때 엔터 쳐서 글자 씹히는 현상 방지!
                     if (e.isComposing) return;
 
                     if (e.key === 'Enter') {
-                        e.preventDefault(); // 폼 제출 방지
+                        e.preventDefault();
                         addTag(day, this.value);
                         this.value = '';
                     } else if (e.key === 'Backspace' && this.value === '') {
-                        // 입력창이 비어있을 때 백스페이스 누르면 마지막 칩 삭제!
                         if (tagList.lastChild) {
                             tagList.removeChild(tagList.lastChild);
                         }
                     }
                 });
 
-                // 2. [글자가 입력될 때] 쉼표나 더블 스페이스 감지
+                // 2. 🌟 [핵심] 글자가 입력될 때 (복붙 포함) 줄바꿈(\n), 쉼표(,), 더블스페이스 즉시 감지!
                 input.addEventListener('input', function (e) {
-                    if (this.value.includes(',')) {
-                        const parts = this.value.split(',');
-                        this.value = parts.pop(); // 쉼표 뒤에 쓰던 글자는 남겨둠
-                        parts.forEach(p => addTag(day, p));
-                    } else if (this.value.includes('  ')) { // 스페이스바 2번
-                        const parts = this.value.split('  ');
-                        this.value = parts.pop();
+                    if (this.value.includes('\n') || this.value.includes(',') || this.value.includes('  ')) {
+                        // 엔터나 쉼표가 들어오면 싹 다 쪼개버리기!
+                        const parts = this.value.split(/[\n,]+|\s{2,}/).map(t => t.trim()).filter(t => t !== "");
+                        this.value = ''; // 입력창 싹 비우기
                         parts.forEach(p => addTag(day, p));
                     }
-                });
-
-                // 🌟 3. [방어막 2] 다른 곳에서 여러 줄을 복사해서 붙여넣기(Paste) 했을 때!
-                input.addEventListener('paste', function (e) {
-                    e.preventDefault();
-                    // 클립보드에서 텍스트 긁어오기
-                    const pasteText = (e.clipboardData || window.clipboardData).getData('text');
-
-                    // 줄바꿈(\n)이나 쉼표(,)로 싹 다 쪼개기
-                    const parts = pasteText.split(/[\n,]+/).map(t => t.trim()).filter(t => t !== "");
-
-                    // 쪼갠 글자들을 전부 칩으로 예쁘게 변환!
-                    parts.forEach(p => addTag(day, p));
                 });
             });
         });
