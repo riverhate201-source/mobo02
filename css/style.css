@@ -2255,6 +2255,11 @@ body.dark-mode .toggle-switch input:checked+.toggle-slider {
     /* 무조건 굵게 나오는 걸 적당한 굵기로 변경 */
 }
 
+/* 🔥 스크롤바 완전 박멸 (사파리/크롬 대응) */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
 
 /* 애플(iOS/iPadOS) 강제 파란색 링크(데이터 탐지) 영구 박멸! */
 a[x-apple-data-detectors] {
