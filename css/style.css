@@ -17,6 +17,7 @@ body {
     color: #333;
     transition: background-color 0.3s, color 0.3s;
     overflow-x: hidden;
+    word-break: keep-all;
 }
 
 body.dark-mode {
