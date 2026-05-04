@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="mobo">
-    <link rel="stylesheet" href="./css/style.css?v=2.8">
+    <link rel="stylesheet" href="./css/style.css?v=2.9">
 
 
 
@@ -1090,7 +1090,7 @@
             }, 10);
         }
 
-        // 🪄 엔터, 쉼표, 더블스페이스, 백스페이스 감지 센서 설치!
+        // 🪄 엔터, 쉼표, 더블스페이스, 백스페이스, 복붙 감지 센서 설치!
         document.addEventListener("DOMContentLoaded", () => {
             const dayList = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일', '10일 연재', '격주 연재'];
             dayList.forEach(day => {
@@ -1098,8 +1098,11 @@
                 const tagList = document.getElementById(`tag-list-${day}`);
                 if (!input || !tagList) return;
 
-                // [키보드 누를 때] 엔터 & 백스페이스 감지
+                // 1. [키보드 누를 때] 엔터 & 백스페이스 감지
                 input.addEventListener('keydown', function (e) {
+                    // 🌟 [방어막 1] 한글 자음/모음이 조합 중일 때 엔터 쳐서 글자 씹히는 현상 방지!
+                    if (e.isComposing) return;
+
                     if (e.key === 'Enter') {
                         e.preventDefault(); // 폼 제출 방지
                         addTag(day, this.value);
@@ -1112,7 +1115,7 @@
                     }
                 });
 
-                // [글자가 입력될 때] 쉼표나 더블 스페이스 감지
+                // 2. [글자가 입력될 때] 쉼표나 더블 스페이스 감지
                 input.addEventListener('input', function (e) {
                     if (this.value.includes(',')) {
                         const parts = this.value.split(',');
@@ -1123,6 +1126,19 @@
                         this.value = parts.pop();
                         parts.forEach(p => addTag(day, p));
                     }
+                });
+
+                // 🌟 3. [방어막 2] 다른 곳에서 여러 줄을 복사해서 붙여넣기(Paste) 했을 때!
+                input.addEventListener('paste', function (e) {
+                    e.preventDefault();
+                    // 클립보드에서 텍스트 긁어오기
+                    const pasteText = (e.clipboardData || window.clipboardData).getData('text');
+
+                    // 줄바꿈(\n)이나 쉼표(,)로 싹 다 쪼개기
+                    const parts = pasteText.split(/[\n,]+/).map(t => t.trim()).filter(t => t !== "");
+
+                    // 쪼갠 글자들을 전부 칩으로 예쁘게 변환!
+                    parts.forEach(p => addTag(day, p));
                 });
             });
         });

@@ -2479,6 +2479,8 @@ body.dark-mode .batch-theme-text {
     font-weight: normal;
     font-size: 14px;
     line-height: 1;
+    padding: 0 4px;
+    margin-right: -4px;
 }
 
 .tag-chip-del:hover {
