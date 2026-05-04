@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="mobo">
-    <link rel="stylesheet" href="./css/style.css?v=2.7">
+    <link rel="stylesheet" href="./css/style.css?v=2.8">
 
 
 
@@ -132,7 +132,7 @@
     </div>
 
     <div id="global-event-alert"
-        style="display:none; text-align:center; font-size:12px; color:#e60012; background-color:#fff0f0; border:1px solid #ffcccc; padding:4px 12px; border-radius:20px; width:fit-content; margin:0 auto 10px auto; font-weight:bold;">
+        style="display:none; text-align:center; font-size:12px; color:#e60012; background-color:#fff0f0; border:1px solid #ffcccc; padding:4px 12px; border-radius:20px; width:fit-content; margin:0 auto 16px auto; font-weight:bold;">
         옆으로 넘겨보세요! 플랫폼 이벤트 진행 중!
     </div>
 
@@ -348,62 +348,90 @@
 
             <!-- 🌟 단일/일괄 스위치 버튼 -->
             <div id="add-mode-toggle-container"
-                style="display: flex; gap: 10px; margin-bottom: 15px; background: #f1f3f5; padding: 4px; border-radius: 8px;">
+                style="display: flex; gap: 10px; margin-bottom: 16px; background: #f1f3f5; padding: 4px; border-radius: 8px;">
                 <button id="btn-mode-single" onclick="setAddMode('single')"
-                    style="flex: 1; padding: 8px; border: none; background: #fff; border-radius: 6px; font-weight: bold; color: #333; box-shadow: 0 1px 3px rgba(0,0,0,0.1); cursor: pointer;">단일
+                    style="flex: 1; padding: 8px; border: none; background: #fff; border-radius: 6px; font-weight: normal; color: #333; box-shadow: 0 1px 3px rgba(0,0,0,0.1); cursor: pointer;">단일
                     추가</button>
                 <button id="btn-mode-batch" onclick="setAddMode('batch')"
-                    style="flex: 1; padding: 8px; border: none; background: transparent; border-radius: 6px; font-weight: bold; color: #888; cursor: pointer;">요일별
+                    style="flex: 1; padding: 8px; border: none; background: transparent; border-radius: 6px; font-weight: normal; color: #888; cursor: pointer;">요일별
                     일괄 추가</button>
             </div>
 
-            <!-- 🌟 요일별 일괄 추가 바둑판 (CSS 클래스 적용 완료!) -->
-            <div id="batch-add-section" style="display: none;">
-                <p class="batch-desc">각 요일별 칸에 작품 제목을 적어주세요! (쉼표나 엔터로 구분)</p>
+            <!-- 🌟 [최종 진화] 요일별 일괄 추가 해시태그 바둑판! -->
+            <div id="batch-add-section" style="display: none; margin-bottom: 15px;">
+                <p class="batch-guide-text">제목을 적고 엔터, 쉼표, 또는 스페이스바 2번을 누르세요!</p>
 
-                <!-- 바둑판 Grid 영역 -->
-                <div class="hide-scrollbar batch-grid">
-                    <div>
-                        <label class="batch-label">월요일</label>
-                        <textarea id="batch-input-월요일" rows="2" class="batch-textarea"></textarea>
+                <div class="hide-scrollbar"
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 4px; padding-bottom: 5px; scrollbar-width: none; -ms-overflow-style: none;">
+                    <!-- 월~일요일 상자 -->
+                    <div><label class="batch-theme-text"
+                            style="font-size: 12px; padding-right: 8px; font-weight: normal;">월요일</label>
+                        <div class="tag-wrapper" onclick="document.getElementById('batch-input-월요일').focus()">
+                            <div id="tag-list-월요일" class="tag-list"></div><input type="text" id="batch-input-월요일"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
-                    <div>
-                        <label class="batch-label">화요일</label>
-                        <textarea id="batch-input-화요일" rows="2" class="batch-textarea"></textarea>
+                    <div><label class="batch-theme-text"
+                            style="font-size: 12px; padding-right: 2px; font-weight: normal;">화요일</label>
+                        <div class="tag-wrapper" onclick="document.getElementById('batch-input-화요일').focus()">
+                            <div id="tag-list-화요일" class="tag-list"></div><input type="text" id="batch-input-화요일"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
-                    <div>
-                        <label class="batch-label">수요일</label>
-                        <textarea id="batch-input-수요일" rows="2" class="batch-textarea"></textarea>
+                    <div><label class="batch-theme-text"
+                            style="font-size: 12px; padding-right: 2px; font-weight: normal;">수요일</label>
+                        <div class="tag-wrapper" onclick="document.getElementById('batch-input-수요일').focus()">
+                            <div id="tag-list-수요일" class="tag-list"></div><input type="text" id="batch-input-수요일"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
-                    <div>
-                        <label class="batch-label">목요일</label>
-                        <textarea id="batch-input-목요일" rows="2" class="batch-textarea"></textarea>
+                    <div><label class="batch-theme-text"
+                            style="font-size: 12px; padding-right: 2px; font-weight: normal;">목요일</label>
+                        <div class="tag-wrapper" onclick="document.getElementById('batch-input-목요일').focus()">
+                            <div id="tag-list-목요일" class="tag-list"></div><input type="text" id="batch-input-목요일"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
-                    <div>
-                        <label class="batch-label">금요일</label>
-                        <textarea id="batch-input-금요일" rows="2" class="batch-textarea"></textarea>
+                    <div><label class="batch-theme-text"
+                            style="font-size: 12px; padding-right: 2px; font-weight: normal;">금요일</label>
+                        <div class="tag-wrapper" onclick="document.getElementById('batch-input-금요일').focus()">
+                            <div id="tag-list-금요일" class="tag-list"></div><input type="text" id="batch-input-금요일"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
-                    <div>
-                        <label class="batch-label">토요일</label>
-                        <textarea id="batch-input-토요일" rows="2" class="batch-textarea"></textarea>
+                    <div><label class="batch-theme-text"
+                            style="font-size: 12px; padding-right: 2px; font-weight: normal;">토요일</label>
+                        <div class="tag-wrapper" onclick="document.getElementById('batch-input-토요일').focus()">
+                            <div id="tag-list-토요일" class="tag-list"></div><input type="text" id="batch-input-토요일"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
-                    <div>
-                        <label class="batch-label">일요일</label>
-                        <textarea id="batch-input-일요일" rows="2" class="batch-textarea"></textarea>
+                    <div><label class="batch-theme-text"
+                            style="font-size: 12px; padding-right: 2px; font-weight: normal;">일요일</label>
+                        <div class="tag-wrapper" onclick="document.getElementById('batch-input-일요일').focus()">
+                            <div id="tag-list-일요일" class="tag-list"></div><input type="text" id="batch-input-일요일"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
 
-                    <!-- 특수 요일 (10일 연재) -->
+                    <!-- 특수 요일 상자 -->
                     <div>
-                        <label class="batch-label batch-label-10day">10일 연재</label>
-                        <textarea id="batch-input-10일 연재" rows="2"
-                            class="batch-textarea batch-textarea-10day"></textarea>
+                        <label class="batch-theme-text"
+                            style="font-size: 12px; padding-right: 2px; font-weight: normal;">10일 연재</label>
+                        <div class="tag-wrapper wrapper-10day"
+                            onclick="document.getElementById('batch-input-10일 연재').focus()">
+                            <div id="tag-list-10일 연재" class="tag-list"></div><input type="text" id="batch-input-10일 연재"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
-
-                    <!-- 특수 요일 (격주 연재 - 가로로 길게) -->
-                    <div class="batch-span-2">
-                        <label class="batch-label batch-label-biweekly">격주 연재</label>
-                        <textarea id="batch-input-격주 연재" rows="2"
-                            class="batch-textarea batch-textarea-biweekly"></textarea>
+                    <div style="grid-column: span 2;">
+                        <label class="batch-theme-text"
+                            style="font-size: 12px; font-weight: normal; padding-right: 2px;">격주 연재</label>
+                        <div class="tag-wrapper wrapper-biweekly"
+                            onclick="document.getElementById('batch-input-격주 연재').focus()">
+                            <div id="tag-list-격주 연재" class="tag-list"></div><input type="text" id="batch-input-격주 연재"
+                                class="tag-input" placeholder="입력 후 엔터">
+                        </div>
                     </div>
                 </div>
 
@@ -958,6 +986,8 @@
             }
         }
 
+
+
         function isDateMatch(cycleStr, dateObj) {
             if (!cycleStr || !cycleStr.includes("10일 연재")) return false;
             let match = cycleStr.match(/\((.*?)\)/);
@@ -1042,6 +1072,60 @@
             checkRemoteUpdate(); // 2. 업데이트 소식 체크
             autoUpdatePastBiweeklyDates(); // 🔥 앱 처음 켤 때도 날짜 갱신 검사!
         };
+
+        // 🪄 태그(칩) 생성 함수
+        function addTag(day, text) {
+            text = text.trim();
+            if (!text) return;
+            const tagList = document.getElementById(`tag-list-${day}`);
+            const span = document.createElement('span');
+            span.className = 'tag-chip';
+            span.dataset.val = text; // 나중에 저장할 때 빼갈 데이터!
+            span.innerHTML = `${text} <span class="tag-chip-del" onclick="this.parentElement.remove()">×</span>`;
+            tagList.appendChild(span);
+            // 🌟 [핵심 마법] 칩이 추가될 때마다 스크롤을 맨 아래로 끌어내려서 입력창을 무조건 보여주기!
+            setTimeout(() => {
+                const wrapper = tagList.parentElement;
+                if (wrapper) wrapper.scrollTop = wrapper.scrollHeight;
+            }, 10);
+        }
+
+        // 🪄 엔터, 쉼표, 더블스페이스, 백스페이스 감지 센서 설치!
+        document.addEventListener("DOMContentLoaded", () => {
+            const dayList = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일', '10일 연재', '격주 연재'];
+            dayList.forEach(day => {
+                const input = document.getElementById(`batch-input-${day}`);
+                const tagList = document.getElementById(`tag-list-${day}`);
+                if (!input || !tagList) return;
+
+                // [키보드 누를 때] 엔터 & 백스페이스 감지
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault(); // 폼 제출 방지
+                        addTag(day, this.value);
+                        this.value = '';
+                    } else if (e.key === 'Backspace' && this.value === '') {
+                        // 입력창이 비어있을 때 백스페이스 누르면 마지막 칩 삭제!
+                        if (tagList.lastChild) {
+                            tagList.removeChild(tagList.lastChild);
+                        }
+                    }
+                });
+
+                // [글자가 입력될 때] 쉼표나 더블 스페이스 감지
+                input.addEventListener('input', function (e) {
+                    if (this.value.includes(',')) {
+                        const parts = this.value.split(',');
+                        this.value = parts.pop(); // 쉼표 뒤에 쓰던 글자는 남겨둠
+                        parts.forEach(p => addTag(day, p));
+                    } else if (this.value.includes('  ')) { // 스페이스바 2번
+                        const parts = this.value.split('  ');
+                        this.value = parts.pop();
+                        parts.forEach(p => addTag(day, p));
+                    }
+                });
+            });
+        });
 
         // 🎛️ 모달창 단일/일괄 스위치 변신 함수!
         function setAddMode(mode) {
@@ -2181,7 +2265,7 @@
             // [추가] 만약 오늘 볼 작품이 0개라면? 안내 문구 띄우기!
             if (displayWorks.length === 0) {
                 listEl.innerHTML = `
-        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; padding: 40px 0;">
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; padding: 30px 0;">
     <p style="margin: 0; font-size: 15px; font-weight: bold; color: #555;">오늘은 연재 작품이 없어요!</p>
     <p style="margin: 5px 0 0 0; font-size: 13px; color: #aaa;">여유롭게 정주행은 어떠신가요?</p>
 </div>
@@ -2792,11 +2876,13 @@
             // 🌟 [추가] 새 작품 추가할 땐 스위치 보이게 하고 무조건 '단일 추가'로 세팅!
             document.getElementById('add-mode-toggle-container').style.display = 'flex';
             setAddMode('single');
-            // 🌟 [신규 추가] 9개의 일괄 추가 텍스트 상자 전부 깨끗하게 지우기!
+            // 🌟 9개의 일괄 추가 태그 상자 전부 깨끗하게 지우기!
             const dayList = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일', '10일 연재', '격주 연재'];
             dayList.forEach(day => {
-                const textarea = document.getElementById(`batch-input-${day}`);
-                if (textarea) textarea.value = '';
+                const tagList = document.getElementById(`tag-list-${day}`);
+                if (tagList) tagList.innerHTML = ''; // 칩들 날리기
+                const input = document.getElementById(`batch-input-${day}`);
+                if (input) input.value = ''; // 적던 글자 날리기
             });
 
 
@@ -2856,14 +2942,13 @@
         function closeAddModal() { document.getElementById('custom-modal').style.display = 'none'; }
 
         function saveWorkFinal() {
-            // 🌟 [핵심] 현재 스위치가 '일괄 추가' 모드인지 확인!
-            const isBatchMode = document.getElementById('batch-add-section').style.display !== 'none';
+            const batchSection = document.getElementById('batch-add-section');
+            const isBatchMode = batchSection && batchSection.style.display !== 'none';
 
             if (isBatchMode) {
-                // 🌟 화면에 안 보이는 드롭다운 대신, 무조건 '연재중'으로 통일!
                 const targetStatus = '연재중';
 
-                // 🌟 [업그레이드] 플랫폼별 맞춤 기본 가격 세팅!
+                // 🌟 [핵심 복구] 플랫폼별 맞춤 기본 가격 세팅 (우니님 기획 완벽 복원!)
                 let defaultCoin = 0;
                 if (currentPlatform === 'lezhin' || currentPlatform === 'bomtoon') {
                     defaultCoin = 3;
@@ -2874,21 +2959,27 @@
                 }
 
                 let addedCount = 0;
-
-                // 9개의 요일 상자 이름을 배열로 준비
                 const dayList = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일', '10일 연재', '격주 연재'];
 
-                // 요일 상자를 하나씩 열어보면서 텍스트가 있으면 작품으로 변환!
                 dayList.forEach(day => {
-                    const textarea = document.getElementById(`batch-input-${day}`);
-                    if (textarea && textarea.value.trim() !== "") {
-                        // 쉼표나 줄바꿈으로 제목들 쪼개기
-                        const titles = textarea.value.split(/[\n,]+/).map(t => t.trim()).filter(t => t !== "");
+                    const tagList = document.getElementById(`tag-list-${day}`);
+                    const input = document.getElementById(`batch-input-${day}`);
 
+                    let titles = [];
+                    // 🌟 1. 만들어진 칩(태그)들의 데이터 쏙쏙 빼오기
+                    if (tagList) {
+                        Array.from(tagList.children).forEach(span => {
+                            if (span.dataset.val) titles.push(span.dataset.val);
+                        });
+                    }
+                    // 🌟 2. 실수로 엔터 안 치고 입력칸에 남겨둔 글자도 살려주기!
+                    if (input && input.value.trim() !== "") {
+                        titles.push(input.value.trim());
+                    }
+
+                    if (titles.length > 0) {
                         titles.forEach(title => {
                             const workId = Date.now().toString() + "_" + Math.random().toString(36).substr(2, 5);
-
-                            // 🌟 특수 요일(10일, 격주)일 경우 임의의 기본 주기를 넣어줍니다! (오류 방지)
                             let defaultCycle = "";
                             if (day === '10일 연재') defaultCycle = "10일 연재 (10/20/30)";
                             else if (day === '격주 연재') defaultCycle = "격주 연재";
@@ -2898,8 +2989,6 @@
                                 coin: defaultCoin, progress: "1화", status: targetStatus,
                                 img: "", time: "", lastDeductDate: ""
                             };
-
-                            // 알아서 찰떡같이 해당 요일 서랍에 넣기!
                             state[currentPlatform][day].push({ ...workData });
                             addedCount++;
                         });
@@ -2908,15 +2997,14 @@
 
                 if (addedCount === 0) return alert("추가할 작품 제목을 하나 이상 적어주세요!");
 
-                // 5. 저장 후 마무리
                 saveData();
                 autoUpdatePastBiweeklyDates();
                 renderAll();
 
-                trackClick('batch_add_works_by_day', { 'platform': currentPlatform, 'count': addedCount }); // 데이터 추적!
+                trackClick('batch_add_works_tags', { 'platform': currentPlatform, 'count': addedCount });
                 alert(`총 ${addedCount}개의 작품이 요일별로 완벽하게 추가되었습니다!`);
                 closeAddModal();
-                return; // 🌟 여기서 함수 멈춤! 밑에 있는 단일 추가 코드는 실행 안 함.
+                return;
             }
 
 
