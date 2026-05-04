@@ -2857,7 +2857,7 @@
 
         function saveWorkFinal() {
             // 🌟 [핵심] 현재 스위치가 '일괄 추가' 모드인지 확인!
-            const isBatchMode = document.getElementById('batch-add-section').style.display === 'block';
+            const isBatchMode = document.getElementById('batch-add-section').style.display !== 'none';
 
             if (isBatchMode) {
                 // 🌟 화면에 안 보이는 드롭다운 대신, 무조건 '연재중'으로 통일!
