@@ -1052,8 +1052,13 @@
             const sectionBatch = document.getElementById('batch-add-section');
             const templateArea = document.getElementById('template-recommend-area');
 
-            // 🌟 [추가] 요일 체크박스와 상태(연재중)가 들어있는 공통 부모 박스를 찾습니다!
+            // 🌟 요일/상태 공통 부모 박스와 모달창 제목 찾기!
             const commonArea = document.getElementById('day-selection-area').parentElement;
+            const modalTitle = document.getElementById('modal-title-label'); // 👈 제목 요소 가져오기
+
+            // 🌟 현재 선택된 플랫폼의 한글 이름 변환기
+            const pltNames = { lezhin: '레진', bomtoon: '봄툰', ridi: '리디', mrblue: '미블' };
+            const currentPltName = pltNames[currentPlatform] || '';
 
             if (mode === 'single') {
                 // 단일 추가 버튼 불 켜기
@@ -1064,12 +1069,16 @@
                 sectionSingle2.style.display = 'block';
                 sectionBatch.style.display = 'none';
 
-                // 🌟 단일 모드일 땐 다시 보여주기!
+                // 단일 모드일 땐 다시 보여주기!
                 if (commonArea) commonArea.style.display = 'flex';
 
                 if (templateArea && document.getElementById('template-chips-container').innerHTML.trim() !== "") {
                     templateArea.style.display = 'block';
                 }
+
+                // 🌟 [핵심] 단일 추가 탭일 때는 원래대로 "작품 추가"로 복구!
+                modalTitle.textContent = "작품 추가";
+
             } else {
                 // 일괄 추가 버튼 불 켜기
                 btnBatch.style.background = '#fff'; btnBatch.style.color = '#333'; btnBatch.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
@@ -1077,12 +1086,16 @@
 
                 sectionSingle1.style.display = 'none';
                 sectionSingle2.style.display = 'none';
-                sectionBatch.style.display = 'block';
+                // 바둑판 그리드 활성화
+                sectionBatch.style.display = 'grid';
 
-                // 🌟 일괄 추가 모드일 땐 중복되는 요일/상태 칸 싹 숨기기!
+                // 일괄 모드일 땐 헷갈리는 요일/상태 선택창 싹 숨기기!
                 if (commonArea) commonArea.style.display = 'none';
 
                 if (templateArea) templateArea.style.display = 'none';
+
+                // 🌟 [핵심] 일괄 추가 탭일 때는 제목 옆에 (플랫폼) 이름 딱 박아주기!
+                modalTitle.textContent = `작품 추가 (${currentPltName})`;
             }
         }
 
