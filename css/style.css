@@ -1,16 +1,13 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-
 * {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'OngleipParkDahyeon', sans-serif !important;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+
 }
 
 @font-face {
     font-family: 'OngleipParkDahyeon';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
-    font-weight: normal;
-    font-display: swap;
 }
 
 body {
@@ -23,68 +20,47 @@ body {
     word-break: keep-all;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 body.dark-mode {
     background-color: #1a1a1b;
     color: #e0e0e0;
 }
 
-.hd_wrap {}
-
-/* 🌟 헤더 전체를 감싸는 래퍼 (여기에 마법의 Flex를 줍니다!) */
-.hd_wrap {
-    display: flex;
-    justify-content: space-between;
-    /* 왼쪽(MOBO)과 오른쪽(햄버거)을 양 끝으로 쫙 밀어줍니다 */
-    align-items: center;
-    /* 텍스트와 버튼의 세로 중앙을 완벽하게 맞춰줍니다 */
-    max-width: 468px;
-    /* 앱 최대 너비 유지 */
-    width: 100%;
-    margin: 0 auto;
-    /* 화면 정중앙에 배치 */
-    /* 위 20px, 양옆 15px, 아래 10px 여백 (취향껏 조절 가능!) */
-    box-sizing: border-box;
-}
-
-/* 🌟 MOBO 로고 타이틀 */
 .main-page-title {
-    margin: 0;
-    /* Flex가 알아서 정렬해주니, 기존에 글자를 밑으로 내리던 마진은 싹 지웁니다! */
-    margin-top: 14px;
-    font-size: 36px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 24px;
+    font-size: 28px;
     line-height: 1.2;
-    font-family: 'OngleipParkDahyeon', sans-serif !important;
 }
 
-/* 🌟 상단 유틸리티 바 (가출 끝! 부모 품으로 복귀) */
+
+/* 상단 유틸리티 바 (햄버거 버튼 감싸는 영역) */
+/* 가출한 햄버거 버튼 구출 작전 (창 크기 변동 완벽 대응) */
 .top-util-bar {
-    display: flex;
-    align-items: center;
-    /* 기존에 있던 position: fixed; top; left; 이런 허공에 띄우는 코드들 싹 다 박멸했습니다! */
-}
-
-/* 🌟 스크롤을 내렸을 때 햄버거 바가 변신할 고정 모드! */
-.top-util-bar.is-fixed {
     position: fixed;
     top: 12px;
     left: 50%;
     transform: translateX(-50%);
     max-width: 468px;
     width: 100%;
+    display: flex;
     justify-content: flex-end;
-    /* 양옆 여백 맞춰주기 */
+    padding: 15px 15px;
+    z-index: 2100;
     pointer-events: none;
-    /* 투명한 상자는 클릭 무시 (밑에 깔린 다른 작품 클릭되게) */
-    z-index: 999;
+    /* 투명한 상자 통과해서 뒤에 클릭 되게 하기 */
 }
 
-/* 고정 모드일 때 햄버거 버튼만 클릭 가능하게 살려주기 */
-.top-util-bar.is-fixed .menu-btn {
-    pointer-events: auto;
-    /* 보너스: 스크롤 시 버튼에 살짝 그림자를 주면 둥둥 떠있는 느낌이 나서 엄청 예뻐집니다! */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    /* 부드럽게 그림자 생김 */
+@media screen and (min-width: 500px) {
+    .top-util-bar {
+        /* PC 풀화면에서는 양옆 쿠션을 0으로 빼서 하얀 박스와 완벽한 칼각을 맞춥니다! */
+        padding: 15px 0;
+    }
 }
 
 /* 1. 햄버거 버튼 (알약 모양 배경) */
@@ -412,7 +388,7 @@ body.dark-mode .day-btn.active {
 .my-wallet-container {
     max-width: 100%;
     margin: 0 auto 30px auto;
-    padding: 35px 18px 18px 18px !important;
+    padding: 45px 18px 18px 18px !important;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
@@ -2640,7 +2616,7 @@ body.dark-mode #custom-modal #batch-add-section .tag-wrapper .tag-input {
     padding: 4px 12px;
     border-radius: 20px;
     width: fit-content;
-    margin: 16px auto 16px auto;
+    margin: 0 auto 16px auto;
     font-weight: normal;
 }
 
