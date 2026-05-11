@@ -57,17 +57,21 @@ body.dark-mode {
 
 .hd_wrap {
     padding: 24px 16px 10px 8px;
+    display: flex;
+    gap: 20px;
 }
 
 .hd_wrap a {
     font-family: 'OngleipParkDahyeon' !important;
 }
 
+
 .main-page-title {
-    font-size: 38px;
+    font-size: 36px;
     line-height: 1.2;
     margin-bottom: 16px;
 }
+
 
 
 /* 상단 유틸리티 바 (햄버거 버튼 감싸는 영역) */
@@ -109,7 +113,7 @@ body.dark-mode {
     justify-content: center !important;
     align-items: center !important;
 
-    padding: 5px !important;
+    padding: 6px !important;
     /* 아이콘이 30px로 커졌으니 여백도 살짝 더 줬어요 */
     margin: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
