@@ -81,7 +81,7 @@ body.dark-mode {
 .top-util-bar {
     position: absolute;
     top: 26px;
-    right: 15px;
+    right: 16px;
     z-index: 2100;
     pointer-events: none;
     /* 투명한 상자 통과해서 뒤에 클릭 되게 하기 */
@@ -111,7 +111,7 @@ body.dark-mode {
 
     display: flex;
     justify-content: flex-end;
-    padding: 0;
+    padding: 0 16px 0 0;
 
     animation: dropDownBtn 0.3s ease-out forwards;
 }
@@ -120,13 +120,14 @@ body.dark-mode {
     .top-util-bar.scroll-fixed {
         /* 🚨 PC 마법: PC에서는 30px 빼기 취소!! 원래대로 꽉 채워서 468px 방어막에 맞추기! */
         width: 100%;
+        padding: 0;
     }
 }
 
 /* 내려오는 애니메이션 */
 @keyframes dropDownBtn {
     0% {
-        top: -40px;
+        top: -50px;
     }
 
     100% {
