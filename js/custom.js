@@ -3634,4 +3634,21 @@ window.addEventListener('popstate', (e) => {
         // 4. 열려있는 창이 아무것도 없다면? 그때는 진짜로 앱을 끕니다.
         history.back();
     }
+
+
 });
+
+window.addEventListener('scroll', function () {
+    const utilBar = document.querySelector('.top-util-bar');
+
+    // 🚨 모바일/PC 상관없이 현재 스크롤 위치를 가장 정확하게 짚어내는 식!
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+
+    if (utilBar) {
+        if (scrollPosition > 50) {
+            utilBar.classList.add('scroll-fixed');
+        } else {
+            utilBar.classList.remove('scroll-fixed');
+        }
+    }
+}, { passive: true });
