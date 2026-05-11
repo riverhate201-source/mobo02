@@ -288,7 +288,7 @@ body.dark-mode .nav-content {
     background: #f8f9fa;
     border-radius: 12px;
     margin-bottom: 8px;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
     transition: 0.2s;
     color: #333;
@@ -2028,12 +2028,12 @@ body.dark-mode .drawer-day-header {
 .global-drawer-tabs {
     display: flex;
     gap: 6px;
-    margin-bottom: 15px;
+    margin-top: 16px;
     position: sticky;
     top: -5px;
     /* 모달창 천장에 딱 붙게 */
     background: #fff;
-    padding-top: 5px;
+    padding-top: 16px;
     padding-bottom: 10px;
     z-index: 20;
     /* 스크롤할 때 제일 위에 뜨도록 */
