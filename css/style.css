@@ -68,9 +68,9 @@ body.dark-mode {
 
 
 .main-page-title {
-    font-size: 36px;
+    font-size: 32px;
     line-height: 1.2;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     color: #555555;
 }
 
@@ -80,7 +80,7 @@ body.dark-mode {
 /* 가출한 햄버거 버튼 구출 작전 (창 크기 변동 완벽 대응) */
 .top-util-bar {
     position: absolute;
-    top: 26px;
+    top: 18px;
     right: 0;
     z-index: 2100;
     pointer-events: none;
