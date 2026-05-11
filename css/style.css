@@ -1,14 +1,19 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 * {
-    font-family: 'OngleipParkDahyeon', sans-serif !important;
+    font-family: 'Pretendard', sans-serif;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
-
 }
 
 @font-face {
     font-family: 'OngleipParkDahyeon';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
 }
+
+
 
 body {
     background-color: #f4f6f8;
@@ -18,24 +23,50 @@ body {
     transition: background-color 0.3s, color 0.3s;
     overflow-x: hidden;
     word-break: keep-all;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+html,
+body {
+    -ms-overflow-style: none;
+    /* IE, 엣지 */
+    scrollbar-width: none;
+    /* 파이어폭스 */
 }
+
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none;
+}
+
 
 body.dark-mode {
     background-color: #1a1a1b;
     color: #e0e0e0;
 }
 
+.header {
+    width: 100%;
+    max-width: 468px;
+    /* 모보 앱 너비 고정 */
+    margin: 0 auto;
+}
+
+.hd_wrap {
+    padding: 24px 16px 10px 8px;
+}
+
+.hd_wrap a {
+    font-family: 'OngleipParkDahyeon' !important;
+}
+
 .main-page-title {
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 24px;
-    font-size: 28px;
+    font-size: 38px;
     line-height: 1.2;
+    margin-bottom: 16px;
 }
 
 
@@ -43,14 +74,14 @@ body.dark-mode {
 /* 가출한 햄버거 버튼 구출 작전 (창 크기 변동 완벽 대응) */
 .top-util-bar {
     position: fixed;
-    top: 12px;
+    top: 40px;
     left: 50%;
     transform: translateX(-50%);
     max-width: 468px;
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding: 15px 15px;
+    padding: 0 15px;
     z-index: 2100;
     pointer-events: none;
     /* 투명한 상자 통과해서 뒤에 클릭 되게 하기 */
@@ -59,7 +90,7 @@ body.dark-mode {
 @media screen and (min-width: 500px) {
     .top-util-bar {
         /* PC 풀화면에서는 양옆 쿠션을 0으로 빼서 하얀 박스와 완벽한 칼각을 맞춥니다! */
-        padding: 15px 0;
+        padding: 0;
     }
 }
 
@@ -78,7 +109,7 @@ body.dark-mode {
     justify-content: center !important;
     align-items: center !important;
 
-    padding: 6px !important;
+    padding: 5px !important;
     /* 아이콘이 30px로 커졌으니 여백도 살짝 더 줬어요 */
     margin: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -89,9 +120,9 @@ body.dark-mode {
 /* 2. 루시드 아이콘 (i와 svg 둘 다 기강 잡기) */
 .menu-btn i,
 .menu-btn svg {
-    width: 28px !important;
+    width: 24px !important;
     /* 🌟 !important로 절대 권력 행사 */
-    height: 28px !important;
+    height: 24px !important;
     display: block;
     /* 불필요한 하단 공백 제거 */
     flex-shrink: 0;
@@ -247,7 +278,7 @@ body.dark-mode .mini-bar {
 }
 
 #storage-bar-fill {
-    background: #2ecc71;
+    background: #fb9292;
     height: 100%;
     width: 0%;
     transition: width 0.5s;
@@ -304,38 +335,25 @@ body.dark-mode .mini-bar {
 .day-btn {
 
     background: #fff;
-
     border: 1px dashed #ddd;
-
     width: 40px;
     /* '전체' 글씨가 예쁘게 들어가도록 아주 살짝만 키움 */
-
     height: 40px;
-
     border-radius: 14px;
-
     color: #797979;
-
     cursor: pointer;
-
     font-size: 13px;
-
     font-weight: normal;
 
     transition: 0.2s;
 
 
 
-    /* 🚨 스와이프할 때 동그라미가 찌그러지거나 글씨가 꺾이는 것 방지 */
 
     flex-shrink: 0 !important;
-
     display: flex !important;
-
     justify-content: center !important;
-
     align-items: center !important;
-
     white-space: nowrap !important;
 
 }
@@ -361,6 +379,8 @@ body.dark-mode .day-btn {
     color: #fff !important;
 
     border-color: #333 !important;
+    box-shadow: 0 0 1px rgba(51, 51, 51, 0.5);
+
 
 }
 
@@ -373,6 +393,8 @@ body.dark-mode .day-btn.active {
     color: #333 !important;
 
     border-color: #fff !important;
+    box-shadow: 0 0 1px rgba(51, 51, 51, 0.5);
+
 
 }
 
@@ -677,7 +699,7 @@ body.dark-mode .filter-close-bottom-btn span {
     gap: 12px;
     overflow-x: auto;
     scrollbar-width: none;
-    padding: 24px 0;
+    padding: 24px 2px;
     min-height: 180px;
     scroll-behavior: smooth;
 }
@@ -972,6 +994,13 @@ body.dark-mode .img-pick-btn {
 .save-btn {
     background: #333;
     color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+body.dark-mode .save-btn {
+    background: #474747;
 }
 
 .work-count-text {
@@ -1063,7 +1092,7 @@ body.dark-mode .weekly-highlight {
 .stat-val+.stat-val::before {
     content: "|";
     color: #ccc;
-    margin: 0 8px;
+    margin: 0 16px;
     font-weight: normal;
 }
 
@@ -1807,7 +1836,7 @@ body.dark-mode .drawer-day-header {
 
 .day-badge {
     background: #f0f4ff;
-    color: #1967d2;
+    color: #333;
     padding: 4px 10px;
     border-radius: 12px;
     font-size: 14px;
@@ -1816,7 +1845,7 @@ body.dark-mode .drawer-day-header {
 
 body.dark-mode .day-badge {
     background: #1a233a;
-    color: #8ab4f8;
+    color: #eee;
 }
 
 .day-count {
@@ -2179,7 +2208,7 @@ body.dark-mode .sort-tab-btn.active {
 
 .plt-setting-name {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: normal;
     color: #333333;
 }
 
@@ -2799,6 +2828,82 @@ body.dark-mode #calc-deduct-btn:hover {
     background: #ff5252;
 }
 
+/* 🌟 작품 검색 모달 제목 (라이트 모드 기본) */
+.search-modal-title {
+    margin-top: 0;
+    text-align: center;
+    color: #333;
+    /* 라이트 모드 색상 */
+}
+
+/* 🌙 작품 검색 모달 제목 (다크 모드) */
+body.dark-mode .search-modal-title {
+    color: #eee;
+    /* 다크 모드 색상 */
+}
+
+/* 🌟 정산 모달 제목 (라이트 모드 기본) */
+.deduction-modal-title {
+    margin-top: 0;
+    text-align: center;
+    color: #333;
+    /* 라이트 모드 색상 */
+}
+
+/* 🌙 정산 모달 제목 (다크 모드) */
+body.dark-mode .deduction-modal-title {
+    color: #eee;
+    /* 다크 모드 색상 */
+}
+
+/* 🌟 출석 링크 설정 모달 제목 (라이트 모드 기본) */
+.link-setting-modal-title {
+    margin-top: 0;
+    text-align: center;
+    color: #333;
+    /* 라이트 모드 색상 */
+}
+
+/* 🌙 출석 링크 설정 모달 제목 (다크 모드) */
+body.dark-mode .link-setting-modal-title {
+    color: #eee;
+    /* 다크 모드 색상 */
+}
+
+/* 🌟 사진 선택 완료 텍스트 (라이트 모드) */
+.img-status-success {
+    color: #333;
+    /* 기존의 산뜻한 초록색 */
+    transition: color 0.3s ease;
+    /* 색상이 바뀔 때 부드럽게 스르륵 변하는 애니메이션 */
+}
+
+/* 🌙 사진 선택 완료 텍스트 (다크 모드) */
+body.dark-mode .img-status-success {
+    /* 다크 모드의 어두운 배경(#333 등)에서는 너무 밝은 형광 초록보다 살짝 차분한 초록이 가독성이 좋습니다! */
+    color: #eee;
+}
+
+/* 🌟 서랍 모달 - 특수 요일 뱃지 기본색 통일 (라이트 모드) */
+.day-badge.badge-10day,
+.day-badge.badge-biweekly,
+.day-badge.badge-finished {
+    background: #f0f4ff;
+    /* 깔끔한 연한 회색 배경 */
+    color: #333;
+    /* 차분한 진회색 글씨 */
+}
+
+/* 🌙 서랍 모달 - 특수 요일 뱃지 기본색 통일 (다크 모드) */
+body.dark-mode .day-badge.badge-10day,
+body.dark-mode .day-badge.badge-biweekly,
+body.dark-mode .day-badge.badge-finished {
+    background: #1a233a;
+    /* 다크모드용 어두운 배경 */
+    color: #eee;
+    /* 다크모드용 밝은 회색 글씨 */
+}
+
 /* 애플(iOS/iPadOS) 강제 파란색 링크(데이터 탐지) 영구 박멸! */
 a[x-apple-data-detectors] {
     color: inherit !important;
@@ -2807,6 +2912,19 @@ a[x-apple-data-detectors] {
     font-family: inherit !important;
     font-weight: inherit !important;
     line-height: inherit !important;
+}
+
+/* 🌟 숫자 입력창(number)의 기본 화살표 숨기기 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    /* 파이어폭스용 */
+    appearance: textfield;
 }
 
 /* 아이폰 홈 화면(PWA) 키보드 증발 방지 방어막 */
