@@ -117,6 +117,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+
+
 function getKSTDate() { const now = new Date(); const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000); return new Date(utc + (9 * 60 * 60 * 1000)); }
 
 
@@ -455,7 +458,7 @@ function openPlatformSettingModal() {
     const listEl = document.getElementById('platform-sort-list');
     listEl.innerHTML = '';
 
-    const pltNames = { lezhin: '레진 코믹스', bomtoon: '봄툰', ridi: '리디', mrblue: '미스터블루' };
+    const pltNames = { lezhin: '레진코믹스', bomtoon: '봄툰', ridi: '리디', mrblue: '미스터블루' };
     const allPlts = ['lezhin', 'bomtoon', 'ridi', 'mrblue'];
 
     // 켜져 있는 애들을 먼저 위로 올리고, 꺼진 애들은 밑에 배치
@@ -1568,7 +1571,7 @@ function renderList(platform) {
                 // [조건 1] 1개일 때: 이모티콘 싹 빼고 텍스트만!
                 cycleTag = `
                         <div style="width: 100%; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; scrollbar-width: none; margin-bottom: 4px;">
-                            <span style="background: rgba(232, 240, 254, 0.95); color: #1967d2; padding: 4px 6px; border-radius: 4px; font-size: 12px; font-weight: normal; display: inline-block;">
+                            <span style="background: rgba(232, 240, 254, 0.95); color: #1967d2; padding: 4px 3px; border-radius: 4px; font-size: 11px; font-weight: normal; display: inline-block;">
                                 ${parts[0]}
                             </span>
                         </div>`;
@@ -1604,7 +1607,7 @@ function renderList(platform) {
 
                 cycleTag = `
                         <div style="width: 100%; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; scrollbar-width: none; margin-bottom: 4px;">
-                            <span style="background: rgba(232, 240, 254, 0.95); color: #1967d2; padding: 4px 6px; border-radius: 4px; font-size: 12px; font-weight: normal; display: inline-block;">
+                            <span style="background: rgba(232, 240, 254, 0.95); color: #1967d2; padding: 4px 3px; border-radius: 4px; font-size: 11px; font-weight: normal; display: inline-block;">
                                 ${joinedText}
                             </span>
                         </div>`;
@@ -1841,7 +1844,7 @@ function refreshBalance() {
             badgeEl.style.display = 'none';
         } else if (diffDays === 0) {
             // 여기도 expireData.amount 대신 formattedAmt 로 교체!
-            badgeEl.innerHTML = `🚨 ${formattedAmt}${unit} <span style="text-decoration: underline;">오늘 소멸!</span>`;
+            badgeEl.innerHTML = `${formattedAmt}${unit} <span style="color: rgb(255, 48, 48)">오늘 소멸!</span>`;
             badgeEl.style.display = 'inline-block';
         } else {
             // 여기도 교체!

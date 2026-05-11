@@ -66,6 +66,10 @@ body.dark-mode {
     font-family: 'OngleipParkDahyeon' !important;
 }
 
+body.dark-mode .hd_wrap a {
+    color: #bfbfbf;
+}
+
 
 .main-page-title {
     font-size: 32px;
@@ -534,7 +538,6 @@ body.dark-mode .webtoon-container {
     border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
-    margin-bottom: 7px;
 }
 
 body.dark-mode .add-work-btn {
@@ -550,7 +553,7 @@ body.dark-mode .add-work-btn {
     text-align: center;
     font-weight: normal;
     margin-bottom: 13px;
-    font-size: 17px;
+    font-size: 16px;
     color: #4c4c4c;
 }
 
@@ -836,7 +839,7 @@ body.dark-mode .bomtoon-card .no-img-title {
 }
 
 .card-info {
-    padding: 12px 10px;
+    padding: 10px 10px;
 }
 
 .card-info .title {
@@ -931,10 +934,12 @@ body.dark-mode .scroll-btn {
 
 .left-btn {
     left: -10px;
+    padding-left: 2px;
 }
 
 .right-btn {
     right: -10px;
+    padding-left: 3px;
 }
 
 .modal-overlay {
@@ -963,10 +968,12 @@ body.dark-mode .modal-content {
     color: #fff;
 }
 
+
 .modal-content input,
 .modal-select {
     width: 100%;
     padding: 12px;
+    margin-top: 8px;
     margin-bottom: 12px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -1025,7 +1032,7 @@ body.dark-mode .img-pick-btn {
     border: none;
     border-radius: 12px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
     text-align: center;
     transition: background-color 0.2s;
@@ -1036,6 +1043,7 @@ body.dark-mode .img-pick-btn {
 .save-btn {
     background: #333;
     color: #fff;
+    font-size: 13px;
     border: none;
     border-radius: 12px;
     padding: 4px;
@@ -1084,7 +1092,7 @@ body.dark-mode .highlight-result-bomtoon {
     border: 1px dashed #e60012;
     padding: 12px;
     border-radius: 15px;
-    margin: 10px auto 20px auto;
+    margin: 0 auto 20px auto;
     max-width: 468px;
     font-weight: bold;
 }
@@ -1128,6 +1136,7 @@ body.dark-mode .weekly-highlight {
 .stat-val {
     color: #333;
     font-weight: bold;
+    font-size: 16px;
 }
 
 /* 🌟 구분선 (라이트 모드 기본) */
@@ -1136,6 +1145,7 @@ body.dark-mode .weekly-highlight {
     color: #ccc;
     margin: 0 16px;
     font-weight: normal;
+    font-size: 12px;
 }
 
 /* ========================================= */
@@ -1434,6 +1444,7 @@ body.dark-mode .mrblue-card .no-img-title {
 
 .platform-name {
     margin-bottom: 2px;
+    font-size: 14px;
     font-weight: normal;
     color: #666;
 }
@@ -2323,13 +2334,10 @@ body.dark-mode .toggle-switch input:checked+.toggle-slider {
 
 /* 브라우저 기본값을 무시하고 내 마음대로 커스텀! */
 .platform-header {
-    font-size: 26px;
-    /* 브라우저 기본 1.5em을 무시하고 18px로 덮어씌움 */
+    font-size: 24px;
     margin: 3px;
     padding: 6px 0;
-    /* 브라우저가 만든 위아래 기본 여백 싹 날려버림 */
-    font-weight: 600;
-    /* 무조건 굵게 나오는 걸 적당한 굵기로 변경 */
+    font-weight: 700;
 }
 
 /* 🔥 스크롤바 완전 박멸 (사파리/크롬 대응) */
@@ -2684,12 +2692,34 @@ body.dark-mode #custom-modal #batch-add-section .tag-wrapper .tag-input {
     background-color: #fff0f0;
     /* 연한 핑크빛 배경 */
     border: 1px solid #ffcccc;
-    padding: 4px 12px;
-    border-radius: 20px;
-    width: fit-content;
+    padding: 8px 12px;
+    border-radius: 12px;
+    max-width: 468px;
     margin: 0 auto 16px auto;
     font-weight: normal;
 }
+
+/* #global-event-alert {
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    background-color: #fff0f0;
+    border: 1px solid #ffcccc;
+    
+    /* 🚨 1. 가로로 길어졌으니 위아래 여백을 살짝 더 주면(4px -> 10px) 훨씬 안정감 있어 보입니다! */
+/* padding: 10px 12px; */
+
+/* 🚨 2. 긴 박스에 맞게 모서리 둥글기를 백업 알림창과 비슷하게 살짝 조절했습니다 (원하시면 20px로 두셔도 됩니다!) */
+/* border-radius: 15px;  */
+
+/* 🚨 3. 핵심 마법! 넓이를 꽉 채우고 468px 방어막 치기 */
+/* width: 100%;  */
+/* max-width: 468px;  */
+/* box-sizing: border-box;패딩 때문에 468px 밖으로 삐져나가는 것 방지! */
+
+/* margin: 0 auto 16px auto; */
+/* font-weight: normal; */
+/* } */
 
 /* 🌙 다크모드 대응 (눈부시지 않게 톤 다운된 빨간색으로!) */
 body.dark-mode #global-event-alert {
@@ -2887,6 +2917,7 @@ body.dark-mode .search-modal-title {
 /* 🌟 정산 모달 제목 (라이트 모드 기본) */
 .deduction-modal-title {
     margin-top: 0;
+    margin-bottom: 16px;
     text-align: center;
     color: #333;
     /* 라이트 모드 색상 */
@@ -2901,6 +2932,7 @@ body.dark-mode .deduction-modal-title {
 /* 🌟 출석 링크 설정 모달 제목 (라이트 모드 기본) */
 .link-setting-modal-title {
     margin-top: 0;
+    margin-bottom: 16px;
     text-align: center;
     color: #333;
     /* 라이트 모드 색상 */

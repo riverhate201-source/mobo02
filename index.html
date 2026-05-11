@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="mobo">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/style.css?v=5.0">
+    <link rel="stylesheet" href="./css/style.css?v=5.2">
 
 
 
@@ -34,7 +34,7 @@
     <script src="https://unpkg.com/lucide@latest" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 
-    <script src="./js/custom.js?v=1.0" defer></script>
+    <script src="./js/custom.js?v=1.3" defer></script>
 
 
 </head>
@@ -111,9 +111,11 @@
         <div id="attend-warning-modal" class="modal-overlay" style="display: none; z-index: 9999;">
             <div class="modal-content" style="text-align: center; border: 3px solid #ff4757;">
                 <h2 style="color: #ff4757; margin-top: 0;">🚨 잠깐만요! 🚨</h2>
-                <p style="font-size: 16px; font-weight: normal; line-height: 1.5;">오늘 무료 코인 받을 수 있는<br>출석체크를 아직 안 하셨어요!
+                <p style="margin-top: 16px; font-size: 16px; font-weight: normal; line-height: 1.5;">오늘 무료 코인 받을 수
+                    있는<br>출석체크를 아직 안 하셨어요!
                 </p>
-                <p id="attend-missing-text" style="color: #747d8c; margin-bottom: 20px; font-size: 14px;"></p>
+                <p id="attend-missing-text"
+                    style="color: #747d8c; margin-bottom: 28px; margin-top: 16px; font-size: 14px;"></p>
                 <button onclick="closeAttendWarning()" class="save-btn" style="width: 100%; font-size: 14px;">지금 출석하러 가기
                 </button>
             </div>
@@ -366,7 +368,7 @@
         <!-- 🎛️ 작품 추가/수정 모달창 (최종 진화형) -->
         <div id="custom-modal" class="modal-overlay" style="display: none; z-index: 6000;">
             <div class="modal-content">
-                <h3 id="modal-title-label">작품 추가</h3>
+                <h3 id="modal-title-label" style="margin-bottom: 16px;">작품 추가</h3>
 
                 <!-- 🌟 단일/일괄 스위치 버튼 -->
                 <div id="add-mode-toggle-container"
@@ -557,7 +559,7 @@
 
         <div id="action-modal" class="modal-overlay" style="display: none;">
             <div class="modal-content action-modal-content">
-                <h3 id="action-title" style="text-align:center; margin-top:0;">작품명</h3>
+                <h3 id="action-title" style="text-align:center; margin-top:0; margin-bottom: 16px;">작품명</h3>
                 <div class="action-btns-container">
                     <button class="act-btn edit-btn" onclick="editFromAction()">작품 상세 수정</button>
                     <button class="act-btn dup-btn" onclick="duplicateFromAction()">이 작품 템플릿으로 복제</button>
@@ -575,7 +577,7 @@
                 <h3 class="search-modal-title">작품 검색</h3>
 
                 <input type="search" id="search-input" placeholder="웹툰 제목을 입력하세요" onkeyup="performSearch()"
-                    style="width: 100%; box-sizing: border-box; margin-bottom: 15px; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                    style="width: 100%; box-sizing: border-box; margin-bottom: 16px; margin-top: 24px; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
 
                 <div id="search-result-list" style="max-height: 300px; overflow-y: auto; padding-right: 5px;">
                 </div>
@@ -584,7 +586,7 @@
 
         <div id="calc-modal" class="modal-overlay" style="display: none; z-index: 5000;">
             <div class="modal-content" style="max-width: 350px;">
-                <h3 style="margin-top: 0; text-align: center;">정주행 계산기</h3>
+                <h3 style="margin-top: 0; margin-bottom: 16px; text-align: center;">정주행 계산기</h3>
 
                 <div style="margin-bottom: 15px;">
                     <select id="calc-platform" class="modal-select" style="font-weight: bold;"
@@ -798,7 +800,7 @@
             <div class="modal-content" style="max-width: 320px; position: relative; padding: 25px 20px;">
                 <button onclick="closePlatformSettingModal()"
                     style="position: absolute; top: 15px; right: 15px; font-size: 28px; background: none; border: none; color: #888; cursor: pointer; line-height: 1;">×</button>
-                <h3 style="margin-top: 0; text-align: center; padding-bottom: 2px;">플랫폼 설정</h3>
+                <h3 style="margin-top: 0; margin-bottom: 16px; text-align: center; padding-bottom: 2px;">플랫폼 설정</h3>
                 <p style="text-align: center; color: #888; font-size: 12px; margin-bottom: 15px;">순서를 꾹 눌러 바꾸거나 스위치를 끄고
                     켤 수
                     있어요!</p>
