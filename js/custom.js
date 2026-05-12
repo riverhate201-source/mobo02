@@ -1617,7 +1617,7 @@ function renderList(platform) {
         }
 
         // 3. 시간 뱃지 (제일 밑에 쌓임!)
-        const timeBadge = work.time ? `<span style="background: #f9f9f9; color: #333; padding: 4px 6px; border-radius: 4px; font-size: 12px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">${work.time}</span>` : '';
+        const timeBadge = work.time ? `<span style="background: #f9f9f9; color: #333; padding: 4px 6px; border-radius: 4px; font-size: 10px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">${work.time}</span>` : '';
 
         const card = document.createElement('div'); card.className = `webtoon-card-link ${platform}-card`;
 
@@ -1700,6 +1700,8 @@ function renderList(platform) {
             listEl.appendChild(card);
         }
     });
+
+    checkScrollArrows();
 }
 
 
@@ -3657,3 +3659,34 @@ window.addEventListener('scroll', function () {
         }
     }
 }, { passive: true });
+
+/* =========================================
+   🚨 가로 스크롤 화살표 자동 숨김/표시 마법
+========================================= */
+function checkScrollArrows() {
+    // 앱 안에 있는 모든 스크롤 영역(scroll-wrapper)을 다 찾아서 검사합니다.
+    const wrappers = document.querySelectorAll('.scroll-wrapper');
+
+    wrappers.forEach(wrapper => {
+        const list = wrapper.querySelector('.webtoon-list');
+        const leftBtn = wrapper.querySelector('.left-btn');
+        const rightBtn = wrapper.querySelector('.right-btn');
+
+        if (!list || !leftBtn || !rightBtn) return; // 혹시라도 요소가 없으면 패스!
+
+        // 💡 핵심 로직: 안에 들어있는 진짜 작품 길이(scrollWidth)가 
+        // 겉에 보이는 껍데기 박스 길이(clientWidth)보다 큰가요?
+        if (list.scrollWidth > list.clientWidth) {
+            // 작품이 꽉 차서 스크롤이 필요하다면 화살표 켜기!
+            leftBtn.style.display = 'flex';
+            rightBtn.style.display = 'flex';
+        } else {
+            // 작품이 몇 개 없어서 스크롤이 필요 없다면 화살표 숨기기!
+            leftBtn.style.display = 'none';
+            rightBtn.style.display = 'none';
+        }
+    });
+}
+
+// 📱 유저가 폰 화면을 가로/세로로 돌리거나 창 크기를 조절할 때도 알아서 다시 계산하게 세팅!
+window.addEventListener('resize', checkScrollArrows);

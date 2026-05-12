@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="mobo">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/style.css?v=5.9">
+    <link rel="stylesheet" href="./css/style.css?v=6.0">
 
 
 
@@ -34,7 +34,7 @@
     <script src="https://unpkg.com/lucide@latest" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 
-    <script src="./js/custom.js?v=1.8" defer></script>
+    <script src="./js/custom.js?v=2.0" defer></script>
 
 
 </head>
@@ -476,7 +476,7 @@
                 <div id="single-add-section-1">
                     <input type="text" id="input-title" placeholder="작품 제목">
                     <input type="url" id="input-url" placeholder="작품 바로가기 링크 (선택)" style="margin-top: 2px;">
-                    <input type="text" id="input-time" placeholder="업로드 시간 (예: 오전 7시 업로드 / 웹소설의 경우에만)" style="flex: 1;">
+                    <input type="text" id="input-time" placeholder="업로드 시간 (예: 오전 7시 업로드)" style="flex: 1;">
                 </div>
 
                 <!-- 2️⃣ 공통 영역 (요일 체크박스 + 상태) -->
@@ -515,7 +515,7 @@
 
                 <!-- 3️⃣ 단일 추가 전용 아랫부분 (주기, 코인, 결제, 사진) -->
                 <div id="single-add-section-2">
-                    <div style="display: flex; gap: 10px; margin-top: 12px; margin-bottom: 12px;">
+                    <div style="display: flex; gap: 10px; margin-top: 8px; margin-bottom: 12px;">
                         <select id="input-cycle-type" class="modal-select" style="flex: 2; margin-bottom: 0;"
                             onchange="toggleCycleInputs(this)">
                             <option value="">특정 연재주기 선택 (없음)</option>

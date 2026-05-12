@@ -838,6 +838,8 @@ body.dark-mode .bomtoon-card .no-img-title {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    z-index: 10;
 }
 
 .card-info {
@@ -977,11 +979,10 @@ body.dark-mode .modal-content {
 .modal-select {
     width: 100%;
     padding: 12px;
-    margin-top: 8px;
     margin-bottom: 12px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 14px;
     background: #f9f9f9;
     color: #333;
 }
