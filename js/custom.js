@@ -1156,7 +1156,7 @@ function processDeduction() {
 
 // 🚨 [복구] '모두 건너뛰기' 버튼을 눌렀을 때 작동하는 함수
 function skipDeduction() {
-    if (confirm("정말 오늘의 정산을 모두 건너뛰시겠습니까?)")) {
+    if (confirm("정말 오늘의 정산을 모두 건너뛰시겠습니까?")) {
         // 확인을 누르면 돈은 안 빼고, '정산 창 닫기 + 완료 도장 찍기' 로직만 실행!
         finishDeduction();
     }
@@ -3532,7 +3532,7 @@ function renderReorderList() {
     const works = state[currentFilterPlt][viewDay] || [];
 
     if (works.length === 0) {
-        listEl.innerHTML = '<p style="text-align: center; color: #888; font-size: 14px; margin-top: 20px;">작품이 없습니다!</p>';
+        listEl.innerHTML = '<p style="text-align: center; color: #888; font-size: 14px;">작품이 없습니다!</p>';
         return;
     }
 

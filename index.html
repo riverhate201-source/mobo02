@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="mobo">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/style.css?v=5.3">
+    <link rel="stylesheet" href="./css/style.css?v=5.4">
 
 
 
@@ -34,7 +34,7 @@
     <script src="https://unpkg.com/lucide@latest" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 
-    <script src="./js/custom.js?v=1.3" defer></script>
+    <script src="./js/custom.js?v=1.4" defer></script>
 
 
 </head>
@@ -161,7 +161,7 @@
                         <!-- 🚀 뱃지 영역 완전 공중부양! (position: absolute; top: -15px;) -->
                         <div
                             style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center; align-items: flex-end;">
-                            <div id="bomtoon-sale-badge" class="sale-badge" style="display:none; padding:2px 8px;">22일
+                            <div id="bomtoon-sale-badge" class="sale-badge">22일
                                 코인
                                 할인!</div>
                             <div id="bomtoon-expire-badge" onclick="updateCoin('bomtoon')"
@@ -184,7 +184,7 @@
 
                         <div
                             style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center; align-items: flex-end;">
-                            <div id="lezhin-sale-badge" class="sale-badge" style="display:none; padding:2px 8px;">20일 코인
+                            <div id="lezhin-sale-badge" class="sale-badge">20일 코인
                                 할인!
                             </div>
                             <div id="lezhin-expire-badge" onclick="updateCoin('lezhin')"
@@ -206,8 +206,8 @@
                         style="text-align: center; display: flex; flex-direction: column; align-items: center; position: relative;">
 
                         <div
-                            style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center; align-items: flex-end;">
-                            <div id="ridi-sale-badge" class="sale-badge" style="display:none; padding:2px 8px;">십오야 이벤트!
+                            style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center;">
+                            <div id="ridi-sale-badge" class="sale-badge">십오야 이벤트!
                             </div>
                             <div id="ridi-expire-badge" onclick="updateCoin('ridi')"
                                 style="display:none; color:#333; font-size:11px; font-weight:bold; background:#ffebee; border: 1px dashed rgba(230, 0, 19, 0.767); padding:4px 8px; border-radius:12px; cursor: pointer;">
@@ -231,7 +231,7 @@
 
                         <div
                             style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center; align-items: flex-end;">
-                            <div id="mrblue-sale-badge" class="sale-badge" style="display:none; padding:2px 8px;">메가
+                            <div id="mrblue-sale-badge" class="sale-badge">메가
                                 블루데이!
                             </div>
                             <div id="mrblue-expire-badge" onclick="updateCoin('mrblue')"
@@ -275,16 +275,18 @@
                 <div class="total-coin-banner">오늘의 필요 코인: <span id="lezhin-needed-val">0</span>개<span
                         id="lezhin-count-val" class="work-count-text">(작품 총 0개)</span>
                     <button class="filter-btn" onclick="toggleFilterMenu('lezhin')">
-                        <i data-lucide="sliders-horizontal" style="width: 18px; height: 18px;"></i>
+                        <i data-lucide="sliders-horizontal" style="width: 20px; height: 20px;"></i>
                     </button>
                 </div>
 
                 <div class="balance-info">정산 후 <span id="lezhin-result" class="highlight-result-lezhin">0</span>C 남아요
                 </div>
                 <div class="scroll-wrapper">
-                    <button class="scroll-btn left-btn"><i data-lucide="chevrons-left"></i></button>
+                    <button class="scroll-btn left-btn"><i data-lucide="chevrons-left"
+                            style="width: 20px; height: 20px;"></i></button>
                     <div class="webtoon-list" id="lezhin-list"></div>
-                    <button class="scroll-btn right-btn"><i data-lucide="chevrons-right"></i></button>
+                    <button class="scroll-btn right-btn"><i data-lucide="chevrons-right"
+                            style="width: 20px; height: 20px;"></i></button>
                 </div>
             </div>
 
@@ -296,16 +298,18 @@
                 <div class="total-coin-banner">오늘의 필요 코인: <span id="bomtoon-needed-val">0</span>개 <span
                         id="bomtoon-count-val" class="work-count-text">(작품 총 0개)</span>
                     <button class="filter-btn" onclick="toggleFilterMenu('bomtoon')">
-                        <i data-lucide="sliders-horizontal" style="width: 18px; height: 18px;"></i>
+                        <i data-lucide="sliders-horizontal" style="width: 20px; height: 20px;"></i>
                     </button>
                 </div>
 
                 <div class="balance-info">정산 후 <span id="bomtoon-result" class="highlight-result-bomtoon">0</span>C 남아요
                 </div>
                 <div class="scroll-wrapper">
-                    <button class="scroll-btn left-btn"><i data-lucide="chevrons-left"></i></button>
+                    <button class="scroll-btn left-btn"><i data-lucide="chevrons-left"
+                            style="width: 20px; height: 20px;"></i></button>
                     <div class="webtoon-list" id="bomtoon-list"></div>
-                    <button class="scroll-btn right-btn"><i data-lucide="chevrons-right"></i></button>
+                    <button class="scroll-btn right-btn"><i data-lucide="chevrons-right"
+                            style="width: 20px; height: 20px;"></i></button>
                 </div>
             </div>
 
@@ -317,15 +321,17 @@
                 <div class="total-coin-banner">오늘의 필요 캐시: <span id="ridi-needed-val">0</span>원 <span id="ridi-count-val"
                         class="work-count-text">(작품 총 0개)</span>
                     <button class="filter-btn" onclick="toggleFilterMenu('ridi')">
-                        <i data-lucide="sliders-horizontal" style="width: 18px; height: 18px;"></i>
+                        <i data-lucide="sliders-horizontal" style="width: 20px; height: 20px;"></i>
                     </button>
                 </div>
 
                 <div class="balance-info">정산 후 <span id="ridi-result" class="highlight-result-ridi">0</span>원 남아요</div>
                 <div class="scroll-wrapper">
-                    <button class="scroll-btn left-btn"><i data-lucide="chevrons-left"></i></button>
+                    <button class="scroll-btn left-btn"><i data-lucide="chevrons-left"
+                            style="width: 20px; height: 20px;"></i></button>
                     <div class="webtoon-list" id="ridi-list"></div>
-                    <button class="scroll-btn right-btn"><i data-lucide="chevrons-right"></i></button>
+                    <button class="scroll-btn right-btn"><i data-lucide="chevrons-right"
+                            style="width: 20px; height: 20px;"></i></button>
                 </div>
             </div>
 
@@ -337,16 +343,18 @@
                 <div class="total-coin-banner">오늘의 필요 머니: <span id="mrblue-needed-val">0</span>원 <span
                         id="mrblue-count-val" class="work-count-text">(작품 총 0개)</span>
                     <button class="filter-btn" onclick="toggleFilterMenu('mrblue')">
-                        <i data-lucide="sliders-horizontal" style="width: 18px; height: 18px;"></i>
+                        <i data-lucide="sliders-horizontal" style="width: 20px; height: 20px;"></i>
                     </button>
                 </div>
 
                 <div class="balance-info">정산 후 <span id="mrblue-result" class="highlight-result-mrblue">0</span>원 남아요
                 </div>
                 <div class="scroll-wrapper">
-                    <button class="scroll-btn left-btn"><i data-lucide="chevrons-left"></i></button>
+                    <button class="scroll-btn left-btn"><i data-lucide="chevrons-left"
+                            style="width: 20px; height: 20px;"></i></button>
                     <div class="webtoon-list" id="mrblue-list"></div>
-                    <button class="scroll-btn right-btn"><i data-lucide="chevrons-right"></i></button>
+                    <button class="scroll-btn right-btn"><i data-lucide="chevrons-right"
+                            style="width: 20px; height: 20px;"></i></button>
                 </div>
             </div>
         </div>
@@ -780,7 +788,8 @@
                 <button onclick="closeReorderModal()"
                     style="position: absolute; top: 15px; right: 15px; font-size: 28px; background: none; border: none; color: #888; cursor: pointer; line-height: 1;">×</button>
 
-                <h3 id="reorder-title" style="margin-top: 0; text-align: center; padding-bottom: 2px;">순서 편집</h3>
+                <h3 id="reorder-title"
+                    style="margin-top: 0; margin-bottom: 16px; text-align: center; padding-bottom: 2px;">순서 편집</h3>
 
                 <!-- 🔠 가나다 자동 정렬 탭 메뉴 -->
                 <div style="display: flex; gap: 10px; margin-bottom: 15px;">
