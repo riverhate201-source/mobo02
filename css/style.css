@@ -1144,7 +1144,7 @@ body.dark-mode .weekly-highlight {
 .stat-val+.stat-val::before {
     content: "|";
     color: #ccc;
-    margin: 0 16px;
+    margin: 0 8px;
     font-weight: normal;
     font-size: 12px;
 }
