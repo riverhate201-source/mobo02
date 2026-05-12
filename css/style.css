@@ -847,7 +847,8 @@ body.dark-mode .bomtoon-card .no-img-title {
 .card-info .title {
     font-weight: bold;
     font-size: 15px;
-    margin-bottom: 6px;
+    margin-top: 6px;
+    margin-bottom: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1138,7 +1139,7 @@ body.dark-mode .weekly-highlight {
 /* 🌟 주간 누적 통계 금액 강조 (라이트 모드 기본) */
 .stat-val {
     color: #333;
-    font-weight: bold;
+    font-weight: 800;
     font-size: 16px;
 }
 
