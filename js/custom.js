@@ -1848,7 +1848,7 @@ function refreshBalance() {
             badgeEl.style.display = 'inline-block';
         } else {
             // 여기도 교체!
-            badgeEl.textContent = `${formattedAmt}${unit} 소멸 D-${diffDays}`;
+            badgeEl.textContent = `${formattedAmt}${unit} -> D-${diffDays}`;
             badgeEl.style.display = 'inline-block';
         }
     });
