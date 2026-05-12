@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="mobo">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/style.css?v=5.7">
+    <link rel="stylesheet" href="./css/style.css?v=5.8">
 
 
 
@@ -34,7 +34,7 @@
     <script src="https://unpkg.com/lucide@latest" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 
-    <script src="./js/custom.js?v=1.7" defer></script>
+    <script src="./js/custom.js?v=1.8" defer></script>
 
 
 </head>
@@ -110,8 +110,8 @@
 
         <div id="attend-warning-modal" class="modal-overlay" style="display: none; z-index: 9999;">
             <div class="modal-content" style="text-align: center; border: 3px solid #ff4757;">
-                <h2 style="color: #ff4757; margin-top: 0;">🚨 잠깐만요! 🚨</h2>
-                <p style="margin-top: 16px; font-size: 16px; font-weight: normal; line-height: 1.5;">오늘 무료 코인 받을 수
+                <h2 style="font-size: 22px; font-weight: 800; color: #ff4757; margin-top: 0;">🚨 잠깐만요! 🚨</h2>
+                <p style="margin-top: 20px; font-size: 16px; font-weight: normal; line-height: 1.5;">오늘 무료 코인 받을 수
                     있는<br>출석체크를 아직 안 하셨어요!
                 </p>
                 <p id="attend-missing-text"
@@ -161,9 +161,8 @@
                         <!-- 🚀 뱃지 영역 완전 공중부양! (position: absolute; top: -15px;) -->
                         <div
                             style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center; align-items: flex-end;">
-                            <div id="bomtoon-sale-badge" class="sale-badge">22일
-                                코인
-                                할인!</div>
+                            <div id="bomtoon-sale-badge" class="sale-badge">코인
+                                할인날!</div>
                             <div id="bomtoon-expire-badge" onclick="updateCoin('bomtoon')"
                                 style="display:none; color:#333; font-size:11px; font-weight:bold; background:#ffebee; border: 1px dashed rgba(230, 0, 19, 0.767); padding:4px 8px; border-radius:12px; cursor: pointer;">
                             </div>
@@ -184,8 +183,8 @@
 
                         <div
                             style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center; align-items: flex-end;">
-                            <div id="lezhin-sale-badge" class="sale-badge">20일 코인
-                                할인!
+                            <div id="lezhin-sale-badge" class="sale-badge">코인
+                                할인날!
                             </div>
                             <div id="lezhin-expire-badge" onclick="updateCoin('lezhin')"
                                 style="display:none; color:#333; font-size:11px; font-weight:bold; background:#ffebee; border: 1px dashed rgba(230, 0, 19, 0.767); padding:4px 8px; border-radius:12px; cursor: pointer;">
@@ -207,7 +206,7 @@
 
                         <div
                             style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center;">
-                            <div id="ridi-sale-badge" class="sale-badge">십오야 이벤트!
+                            <div id="ridi-sale-badge" class="sale-badge">이벤트!
                             </div>
                             <div id="ridi-expire-badge" onclick="updateCoin('ridi')"
                                 style="display:none; color:#333; font-size:11px; font-weight:bold; background:#ffebee; border: 1px dashed rgba(230, 0, 19, 0.767); padding:4px 8px; border-radius:12px; cursor: pointer;">
@@ -231,8 +230,7 @@
 
                         <div
                             style="position: absolute; top: -33px; width: 100%; display: flex; gap: 6px; justify-content: center; align-items: flex-end;">
-                            <div id="mrblue-sale-badge" class="sale-badge">메가
-                                블루데이!
+                            <div id="mrblue-sale-badge" class="sale-badge">이벤트!
                             </div>
                             <div id="mrblue-expire-badge" onclick="updateCoin('mrblue')"
                                 style="display:none; color:#333; font-size:11px; font-weight:bold; background:#ffebee; border: 1px dashed rgba(230, 0, 19, 0.767); padding:4px 8px; border-radius:12px; cursor: pointer;">

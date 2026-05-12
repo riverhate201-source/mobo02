@@ -120,6 +120,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
 function getKSTDate() { const now = new Date(); const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000); return new Date(utc + (9 * 60 * 60 * 1000)); }
 
 
@@ -1211,23 +1213,23 @@ function checkSaleDays() {
     if (isDoublePoint && isWeekly) {
         // 1~3일인데 화요일이기까지 한 대박날!
         hiddenEvents.push('리디 1·2·3 더블적립 및 화요 위클리');
-        if (rBadge) { rBadge.textContent = "1·2·3 더블 & 위클리!"; rBadge.style.display = 'inline-block'; }
+        if (rBadge) { rBadge.textContent = "이벤트!"; rBadge.style.display = 'inline-block'; }
     } else if (isDoublePoint) {
         // 1~3일 이벤트만 진행 중
         hiddenEvents.push('리디 1·2·3 더블적립');
-        if (rBadge) { rBadge.textContent = "1·2·3 더블적립!"; rBadge.style.display = 'inline-block'; }
+        if (rBadge) { rBadge.textContent = "이벤트!"; rBadge.style.display = 'inline-block'; }
     } else if (isSibo && isWeekly) {
         // 십오야 + 화요일 겹치는 날
         hiddenEvents.push('리디 십오야 및 위클리');
-        if (rBadge) { rBadge.textContent = "십오야 & 위클리!"; rBadge.style.display = 'inline-block'; }
+        if (rBadge) { rBadge.textContent = "이벤트!"; rBadge.style.display = 'inline-block'; }
     } else if (isSibo) {
         // 십오야만 진행 중
         hiddenEvents.push('리디 십오야');
-        if (rBadge) { rBadge.textContent = "십오야 기간!"; rBadge.style.display = 'inline-block'; }
+        if (rBadge) { rBadge.textContent = "이벤트!"; rBadge.style.display = 'inline-block'; }
     } else if (isWeekly) {
         // 화요 위클리만 진행 중
         hiddenEvents.push('리디 화요 위클리');
-        if (rBadge) { rBadge.textContent = "화요 위클리!"; rBadge.style.display = 'inline-block'; }
+        if (rBadge) { rBadge.textContent = "이벤트!"; rBadge.style.display = 'inline-block'; }
     } else {
         // 아무것도 없음
         if (rBadge) rBadge.style.display = 'none';
@@ -1237,7 +1239,7 @@ function checkSaleDays() {
     if (date >= 1 && date <= 3) {
         hiddenEvents.push('미블 메가 블루데이');
         if (mBadge) {
-            mBadge.textContent = "메가 블루데이!";
+            mBadge.textContent = "이벤트!";
             mBadge.style.display = 'inline-block';
         }
     } else {
@@ -1541,8 +1543,8 @@ function renderList(platform) {
     if (displayWorks.length === 0) {
         listEl.innerHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; padding: 30px 0;">
-    <p style="margin: 0; font-size: 15px; font-weight: bold; color: #555;">오늘은 연재 작품이 없어요!</p>
-    <p style="margin: 5px 0 0 0; font-size: 13px; color: #aaa;">여유롭게 정주행은 어떠신가요?</p>
+    <p style="margin: 0; margin-top:5px; font-size: 11px; font-weight: bold; color: #555;">오늘은 연재 작품이 없어요!</p>
+    <p style="margin: 5px 0 0 0; font-size: 11px; color: #aaa;">여유롭게 정주행은 어떠신가요?</p>
 </div>
     `;
         return; // 카드를 그리지 않고 여기서 멈춤!
@@ -1848,7 +1850,7 @@ function refreshBalance() {
             badgeEl.style.display = 'inline-block';
         } else {
             // 여기도 교체!
-            badgeEl.textContent = `${formattedAmt}${unit} -> D-${diffDays}`;
+            badgeEl.textContent = `${formattedAmt}${unit} : D-${diffDays}`;
             badgeEl.style.display = 'inline-block';
         }
     });
