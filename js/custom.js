@@ -68,7 +68,7 @@ function applyTheme() {
             document.body.classList.remove('dark-mode');
         }
     }
-    updateDarkModeBtn();
+
 }
 
 // 2. 폰 화면 켜둔 채로 제어센터에서 다크 모드 껐다 켰을 때, 새로고침 없이 즉시 반응하게 만들기!
@@ -81,7 +81,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
         } else {
             document.body.classList.remove('dark-mode');
         }
-        updateDarkModeBtn();
+
     }
 });
 
@@ -275,6 +275,7 @@ window.onload = function () {
     checkStorage(); checkBackupStatus(); updatePlatformOrder();
     checkRemoteUpdate(); // 2. 업데이트 소식 체크
     autoUpdatePastBiweeklyDates(); // 🔥 앱 처음 켤 때도 날짜 갱신 검사!
+    initThemeSwitchSwipe();
 };
 
 // 🪄 태그(칩) 생성 함수
@@ -1121,6 +1122,11 @@ function processDeduction() {
             deductFromWallet('ridi', tR, 'r');
             deductFromWallet('mrblue', tM, 'm');
 
+
+            if (tL > 0) {
+                localStorage.removeItem('lezhinBonusExpire');
+            }
+
             const addedWon = tR + tM;
             addWeeklySpent(tL + tB, addedWon);
             localStorage.setItem('monthlyHistory', JSON.stringify(monthlyHistory));
@@ -1352,6 +1358,9 @@ function loadAllData() {
         if (p.bomtoonExpire) localStorage.setItem('bomtoonExpire', JSON.stringify(p.bomtoonExpire));
         if (p.ridiExpire) localStorage.setItem('ridiExpire', JSON.stringify(p.ridiExpire));
         if (p.mrblueExpire) localStorage.setItem('mrblueExpire', JSON.stringify(p.mrblueExpire));
+        if (p.lastAttendDate) localStorage.setItem('lastAttendDate', p.lastAttendDate);
+        if (p.lezhinAttend) localStorage.setItem('lezhinAttend', p.lezhinAttend);
+        if (p.bomtoonAttend) localStorage.setItem('bomtoonAttend', p.bomtoonAttend);
     }
 
     // 🚨 앱을 켤 때마다 자동으로 청소기를 싹~ 돌려서 휴재작들을 전부 뒤로 밀어냅니다!
@@ -1378,7 +1387,10 @@ function saveData() {
         lezhinExpire: JSON.parse(localStorage.getItem('lezhinExpire')) || null,
         bomtoonExpire: JSON.parse(localStorage.getItem('bomtoonExpire')) || null,
         ridiExpire: JSON.parse(localStorage.getItem('ridiExpire')) || null,
-        mrblueExpire: JSON.parse(localStorage.getItem('mrblueExpire')) || null
+        mrblueExpire: JSON.parse(localStorage.getItem('mrblueExpire')) || null,
+        lastAttendDate: localStorage.getItem('lastAttendDate') || '',
+        lezhinAttend: localStorage.getItem('lezhinAttend') || 'false',
+        bomtoonAttend: localStorage.getItem('bomtoonAttend') || 'false'
     };
 
     try {
@@ -1394,9 +1406,9 @@ function saveData() {
     }
 }
 
-function toggleDarkMode() { const isDark = document.body.classList.toggle('dark-mode'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); updateDarkModeBtn(); saveData(); }
+function toggleDarkMode() { const isDark = document.body.classList.toggle('dark-mode'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); saveData(); }
 
-function updateDarkModeBtn() { const isDark = document.body.classList.contains('dark-mode'); const btn = document.getElementById('menu-dark-mode-btn'); if (btn) btn.textContent = isDark ? "라이트 모드" : "다크 모드"; }
+
 function changeDay(day) {
     // 🌟 [전체] 버튼을 눌렀을 때는 메인 화면은 놔두고 모달창만 띄우기!
     if (day === '전체') {
@@ -1415,6 +1427,8 @@ function changeDay(day) {
     // 🌟 월~일 버튼을 눌렀을 때는 기존처럼 메인 화면 리스트 바꾸기!
     viewDay = day;
     renderAll();
+    checkScrollArrows();
+    setTimeout(checkScrollArrows, 20);
 }
 
 function updatePlatformOrder() {
@@ -2230,7 +2244,7 @@ function openAddModal(platform) {
 
 function closeAddModal() { document.getElementById('custom-modal').style.display = 'none'; }
 
-function saveWorkFinal() {
+async function saveWorkFinal() {
     const batchSection = document.getElementById('batch-add-section');
     const isBatchMode = batchSection && batchSection.style.display !== 'none';
 
@@ -2394,7 +2408,39 @@ function saveWorkFinal() {
         }
     }
 
-    const workData = { id: workId, title, url, cycle: cycleStr, coin, progress, status: targetStatus, img: tempImg, time, lastDeductDate: finalDeductDate };
+    // 🚨 여기서부터 ImgBB 업로드 로직 추가! 🚨
+    let finalImgUrl = tempImg;
+
+    // 🌟 똑똑한 필터링: 사진 보관함이 비어있지 않고, '뚱뚱한 원본(data:image)'일 때만 창고로 보냅니다!
+    if (tempImg && tempImg.startsWith('data:image')) {
+        try {
+            const statusText = document.getElementById('image-status-text');
+            if (statusText) {
+                statusText.textContent = "사진 업로드 중...";
+                statusText.style.color = "#1967d2";
+            }
+            finalImgUrl = await uploadImageToImgBB(tempImg);
+        } catch (e) {
+            console.error("사진 업로드 에러:", e);
+            alert("사진 용량이 너무 큽니다! (다른 사진으로 교체해주세요)");
+            return; // 👈 에러 나면 저장을 멈추기
+        }
+    }
+
+    // 🌟 텍스트 주소로 바뀐 새로운 workData!
+    const workData = {
+        id: workId,
+        title: title,
+        url: url,
+        cycle: cycleStr,
+        coin: coin,
+        progress: progress,
+        status: targetStatus,
+        img: finalImgUrl,
+        time: time,
+        lastDeductDate: finalDeductDate
+    };
+    // 🚨 여기까지 추가 완료 🚨
 
     if (editMode) {
         Object.keys(state[currentPlatform]).forEach(day => {
@@ -2596,26 +2642,71 @@ function triggerImport() {
     document.getElementById('backup-file-input').click();
 }
 
-// 브라우저가 절대 무시할 수 없는 가장 튼튼한 복구 함수!
+// 🚨 브라우저가 절대 무시할 수 없는 가장 튼튼하고 똑똑한 복구+이사 함수! (철벽 방어 유지, 구글 연동만 제거)
 function handleImport(event) {
     const file = event.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = function (e) {
+    reader.onload = async function (e) {
         try {
             const content = e.target.result;
             const parsedData = JSON.parse(content);
 
             if (parsedData && parsedData.state) {
-                localStorage.setItem(STORAGE_KEY, content);
-                alert("데이터 복원 완료! 화면을 새로고침합니다.");
+                // 🌟 [핵심 방어 1] 일단 원본 그대로 브라우저에 '즉시' 강제 저장!!!
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(parsedData));
+
+                // 🌟 [핵심 방어 2] 새로고침/뒤로가기 방어막 켜기!
+                const preventReload = (e) => {
+                    const warningMessage = "복구를 진행 중입니다. 정말 새로고침 하시겠습니까? (새로고침 시 복구 중단)";
+                    e.preventDefault();
+                    e.returnValue = warningMessage;
+                    return warningMessage;
+                };
+                window.addEventListener('beforeunload', preventReload);
+
+                alert("데이터 복원이 시작되었습니다!\n완료 팝업이 뜰 때까지 **절대 새로고침하거나 앱을 끄지 마세요!**\n(약 10초~1분 소요)");
+
+                let count = 0;
+                const platforms = ['lezhin', 'bomtoon', 'ridi', 'mrblue'];
+
+                // 🌟 사진 창고로 이사 시작
+                for (let plt of platforms) {
+                    if (parsedData.state[plt]) {
+                        for (let day of Object.keys(parsedData.state[plt])) {
+                            for (let work of parsedData.state[plt][day]) {
+                                if (work.img && work.img.startsWith('data:image')) {
+                                    try {
+                                        console.log(`[${work.title}] 사진 업로드 중...`);
+                                        let newUrl = await uploadImageToImgBB(work.img);
+                                        work.img = newUrl; // 창고 주소로 교체!
+                                        count++;
+                                    } catch (err) {
+                                        console.error(`❌ [${work.title}] 사진 업로드 실패:`, err);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 🌟 3. 창고 이사가 끝나서 홀가분해진 가벼운 데이터를 다시 저장 (덮어쓰기)
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(parsedData));
+
+                // 🚨 [유일하게 지워진 부분!] 파이어베이스 클라우드 업로드 함수 삭제 완료! 🚨
+
+                // 🌟 [방어 해제] 무사히 끝났으니 새로고침 방어막 끄기
+                window.removeEventListener('beforeunload', preventReload);
+
+                alert(`복원 성공! 화면을 새로고침합니다.`);
                 location.reload();
             } else {
                 throw new Error("잘못된 형식입니다.");
             }
         } catch (err) {
-            alert("❌ 잘못된 백업 파일이거나 손상되었습니다.\n(모보에서 다운로드한 파일이 맞는지 확인해주세요!)");
+            console.error(err);
+            alert("잘못된 백업 파일이거나 손상되었습니다.\n(모보에서 다운로드한 파일이 맞는지 확인해주세요!)");
         }
         // 파일 읽기가 '완전히 끝난 후'에 초기화해야 모바일에서 안 튕김
         document.getElementById('backup-file-input').value = '';
@@ -2623,6 +2714,7 @@ function handleImport(event) {
 
     reader.readAsText(file);
 }
+
 
 function checkBackupStatus() { const lastBackup = localStorage.getItem('lastBackupDate'); const alertEl = document.getElementById('backup-alert'); if (!lastBackup || (Date.now() - parseInt(lastBackup)) / 86400000 >= 7) alertEl.style.display = 'block'; else alertEl.style.display = 'none'; }
 
@@ -2645,7 +2737,62 @@ function addWeeklySpent(coinAmount, wonAmount = 0) {
     updateWeeklyStatUI();
 }
 
-function initScroll() { document.querySelectorAll('.scroll-wrapper').forEach(wrapper => { const list = wrapper.querySelector('.webtoon-list'); wrapper.querySelector('.left-btn').onclick = () => list.scrollBy({ left: -160, behavior: 'smooth' }); wrapper.querySelector('.right-btn').onclick = () => list.scrollBy({ left: 160, behavior: 'smooth' }); }); }
+/* =========================================
+   🚨 가로 스크롤 화살표 (메모리 누수 해결 완벽판!)
+========================================= */
+
+// 1. 앱 켜질 때 딱 한 번만! 센서와 버튼을 달아주는 함수
+function initScroll() {
+    document.querySelectorAll('.scroll-wrapper').forEach(wrapper => {
+        const list = wrapper.querySelector('.webtoon-list');
+        const leftBtn = wrapper.querySelector('.left-btn');
+        const rightBtn = wrapper.querySelector('.right-btn');
+
+        if (!list || !leftBtn || !rightBtn) return; // 에러 방어막
+
+        // 오리지널 디테일 완벽 복구! (160px 이동)
+        leftBtn.onclick = () => list.scrollBy({ left: -160, behavior: 'smooth' });
+        rightBtn.onclick = () => list.scrollBy({ left: 160, behavior: 'smooth' });
+
+        // 유저가 스와이프할 때마다 감시 (앱 켜질 때 1번만 부착되므로 중복 에러 안 남!)
+        list.addEventListener('scroll', () => {
+            if (list.scrollWidth <= list.clientWidth) {
+                leftBtn.style.display = 'none';
+                rightBtn.style.display = 'none';
+                return;
+            }
+            leftBtn.style.display = list.scrollLeft <= 0 ? 'none' : 'flex';
+            rightBtn.style.display = Math.ceil(list.scrollLeft) >= list.scrollWidth - list.clientWidth - 1 ? 'none' : 'flex';
+        });
+    });
+}
+
+// 2. 요일이 바뀌거나 창 크기가 변할 때, 수동으로 길이를 한 번 재는 스캐너
+function checkScrollArrows() {
+    document.querySelectorAll('.scroll-wrapper').forEach(wrapper => {
+        const list = wrapper.querySelector('.webtoon-list');
+        const leftBtn = wrapper.querySelector('.left-btn');
+        const rightBtn = wrapper.querySelector('.right-btn');
+
+        if (!list || !leftBtn || !rightBtn) return;
+
+        if (list.scrollWidth <= list.clientWidth) {
+            leftBtn.style.display = 'none';
+            rightBtn.style.display = 'none';
+        } else {
+            leftBtn.style.display = list.scrollLeft <= 0 ? 'none' : 'flex';
+            rightBtn.style.display = Math.ceil(list.scrollLeft) >= list.scrollWidth - list.clientWidth - 1 ? 'none' : 'flex';
+        }
+    });
+}
+
+// 창 크기 변동 시 & 처음 로딩 시 재계산
+window.addEventListener('resize', checkScrollArrows);
+window.addEventListener('load', () => {
+    setTimeout(checkScrollArrows, 100);
+});
+
+
 function closeAttendWarning() { document.getElementById('attend-warning-modal').style.display = 'none'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
 // ==========================================
@@ -2970,12 +3117,12 @@ async function checkRemoteUpdate() {
 
             // 🌟 3. 에러 많던 푸시 알림(Notification) 로직은 버리고, 무조건 뜨는 중앙 팝업으로 통일!
             setTimeout(() => {
-                if (confirm(`[모보 새 소식]\n\n${data.title}\n${data.message}\n\n지금 확인하러 가시겠어요?`)) {
+                if (confirm(`[모보 오류 안정화 소식]\n\n${data.title}\n${data.message}\n\n`)) {
                     // 🌟 4. 확인 버튼을 누르면 애널리틱스에 '클릭' 기록 후 이동!
                     if (typeof gtag === 'function') {
                         gtag('event', 'popup_click', { 'event_category': 'notice', 'event_label': 'confirm' });
                     }
-                    window.open(data.link, '_blank');
+                    location.href = data.link;
                 }
             }, 500); // 앱 켜지고 0.5초 뒤에 짠!
 
@@ -3660,33 +3807,200 @@ window.addEventListener('scroll', function () {
     }
 }, { passive: true });
 
-/* =========================================
-   🚨 가로 스크롤 화살표 자동 숨김/표시 마법
-========================================= */
-function checkScrollArrows() {
-    // 앱 안에 있는 모든 스크롤 영역(scroll-wrapper)을 다 찾아서 검사합니다.
-    const wrappers = document.querySelectorAll('.scroll-wrapper');
 
-    wrappers.forEach(wrapper => {
-        const list = wrapper.querySelector('.webtoon-list');
-        const leftBtn = wrapper.querySelector('.left-btn');
-        const rightBtn = wrapper.querySelector('.right-btn');
 
-        if (!list || !leftBtn || !rightBtn) return; // 혹시라도 요소가 없으면 패스!
+// ==========================================
+// 🌙 다크모드 스위치 스와이프(밀기) 기능 추가!
+// ==========================================
+function initThemeSwitchSwipe() {
+    const themeSwitch = document.querySelector('.header-theme-switch');
+    if (!themeSwitch) return;
 
-        // 💡 핵심 로직: 안에 들어있는 진짜 작품 길이(scrollWidth)가 
-        // 겉에 보이는 껍데기 박스 길이(clientWidth)보다 큰가요?
-        if (list.scrollWidth > list.clientWidth) {
-            // 작품이 꽉 차서 스크롤이 필요하다면 화살표 켜기!
-            leftBtn.style.display = 'flex';
-            rightBtn.style.display = 'flex';
-        } else {
-            // 작품이 몇 개 없어서 스크롤이 필요 없다면 화살표 숨기기!
-            leftBtn.style.display = 'none';
-            rightBtn.style.display = 'none';
+    let startX = 0;
+    let isDragging = false;
+
+    // 1. 손가락이 스위치에 닿았을 때 (시작 X좌표 기억)
+    themeSwitch.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = false;
+    });
+
+    // 2. 손가락을 움직일 때 (드래그 중이라고 표시)
+    themeSwitch.addEventListener('touchmove', (e) => {
+        isDragging = true;
+    });
+
+    // 3. 손가락을 뗐을 때 (왼쪽/오른쪽 판별해서 찰칵!)
+    themeSwitch.addEventListener('touchend', (e) => {
+        // 드래그를 안 하고 그냥 톡! 터치한 거면 원래 있던 onclick이 작동하도록 놔둡니다.
+        if (!isDragging) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = endX - startX; // 얼마나 이동했는지 계산
+        const isDark = document.body.classList.contains('dark-mode');
+
+        // 15px 이상 유의미하게 옆으로 밀었을 때만 작동!
+        if (Math.abs(diffX) > 15) {
+            e.preventDefault(); // 🚨 중요: 스와이프로 켰으니 뒤따라오는 '클릭' 이벤트가 중복 실행되는 걸 막아줍니다!
+
+            if (diffX > 15 && !isDark) {
+                // 오른쪽으로 슥~ 밀었는데 라이트 모드면? -> 다크모드 켜기!
+                toggleDarkMode();
+            } else if (diffX < -15 && isDark) {
+                // 왼쪽으로 슥~ 밀었는데 다크 모드면? -> 다크모드 끄기!
+                toggleDarkMode();
+            }
         }
     });
 }
 
-// 📱 유저가 폰 화면을 가로/세로로 돌리거나 창 크기를 조절할 때도 알아서 다시 계산하게 세팅!
-window.addEventListener('resize', checkScrollArrows);
+/* =========================================
+   🎉 폰트 업데이트 공지 팝업 (1회용 마법)
+========================================= */
+
+document.addEventListener('DOMContentLoaded', function () {
+    // 1. 브라우저 기억상자에 'font_update_seen'이라는 도장이 찍혀있는지 확인합니다.
+    const hasSeenNotice = localStorage.getItem('font_update_seen');
+    const updateModal = document.getElementById('update-notice-modal');
+
+    // 2. 도장이 없다면? (처음 들어온 유저라면) 팝업을 짠! 하고 보여줍니다.
+    if (!hasSeenNotice && updateModal) {
+        updateModal.style.display = 'flex';
+    }
+});
+
+// 3. '확인했어요!' 버튼을 누르면 실행되는 함수
+function closeUpdateNotice() {
+    // 팝업을 숨기고
+    document.getElementById('update-notice-modal').style.display = 'none';
+
+    // 브라우저 기억상자에 "이 사람 팝업 봤음!" 하고 도장을 꾹 찍어줍니다. (이제 다신 안 뜸!)
+    localStorage.setItem('font_update_seen', 'true');
+}
+
+// ☁️ 고화질 사진을 ImgBB 창고에 올리고 '주소(URL)'를 받아오는 함수
+async function uploadImageToImgBB(base64Data) {
+    const apiKey = '6963cfb507df01b542e8d66d26483e29';
+
+    try {
+        // 1. 순수 파일(Blob)로 변환 (글자가 깨져서 거절당하는 현상 완벽 방지)
+        const arr = base64Data.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        const fileBlob = new Blob([u8arr], { type: mime });
+
+        const formData = new FormData();
+        formData.append('image', fileBlob, 'image.jpg');
+
+        const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        // 🌟 2. 에러가 났을 때 '서버가 말하는 진짜 이유'를 화면에 띄워줍니다!
+        if (!response.ok || !data.success) {
+            console.error("ImgBB 거절 상세 정보:", data);
+            alert(`🚨 ImgBB 업로드 실패!\n원인: ${data.error.message}\n(API 키 문제이거나 서버 오류입니다. API 키를 새로 발급받아 보세요!)`);
+            throw new Error(data.error.message);
+        }
+
+        return data.data.url;
+
+    } catch (error) {
+        console.error("업로드 함수 에러:", error);
+        throw error;
+    }
+}
+
+// 1초 쉬어가는 대기 함수 (스팸 차단 방지용)
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+/* =========================================
+   🤫 (쉿) 유저 몰래 기존 뚱뚱한 사진들을 ImgBB 창고로 이사 보내는 함수
+========================================= */
+// 2. 메인 이사 함수
+async function silentAutoMigrateToImgBB() {
+    if (window.isMigrating) return;
+    window.isMigrating = true;
+
+    const platforms = ['lezhin', 'bomtoon', 'ridi', 'mrblue'];
+    let worksToMigrate = [];
+
+    // [Step 1] 전체 사진 개수와 이사할 사진 찾기
+    let totalImages = 0;
+    for (let plt of platforms) {
+        if (!state[plt]) continue;
+        for (let day of Object.keys(state[plt])) {
+            for (let work of state[plt][day]) {
+                if (work.img) {
+                    totalImages++;
+                    if (work.img.startsWith('data:image')) {
+                        worksToMigrate.push(work);
+                    }
+                }
+            }
+        }
+    }
+
+    // 이사할 사진이 없다면 종료
+    if (worksToMigrate.length === 0) {
+        window.isMigrating = false;
+        return;
+    }
+
+    let migratedCount = totalImages - worksToMigrate.length; // 이미 이사 된 사진들
+
+    // [Step 2] 이사 시작
+    for (let work of worksToMigrate) {
+        updateMigrationUI(migratedCount + 1, totalImages);
+
+        try {
+            // 🌟 6초 딜레이 (서버 보호)
+            await new Promise(resolve => setTimeout(resolve, 6000));
+
+            let newUrl = await uploadImageToImgBB(work.img);
+            work.img = newUrl;
+            migratedCount++;
+            saveData(); // 1장마다 즉시 저장!
+        } catch (e) {
+            console.error(`[${work.title}] 해당 사진 업로드 실패`, e);
+            // 에러가 나도 앱은 멈추지 않고 다음 사진으로 넘어감
+        }
+    }
+
+    updateMigrationUI(totalImages, totalImages);
+    window.isMigrating = false;
+    console.log("🤫 모든 이사 완료!");
+}
+
+// 🏠 상태창을 업데이트하는 똑똑한 도우미 함수
+function updateMigrationUI(current, total) {
+    let statusEl = document.getElementById('migration-status');
+    // 없으면 HTML에 추가
+    if (!statusEl) {
+        statusEl = document.createElement('div');
+        statusEl.id = 'migration-status';
+        document.body.appendChild(statusEl);
+    }
+
+    // 상태창 표시
+    statusEl.style.display = 'block';
+    statusEl.innerHTML = `사진 업로드 처리 중 (${current}/${total})`;
+
+    // 다 끝나면 3초 뒤에 사라지게 하기
+    if (current >= total) {
+        setTimeout(() => { statusEl.style.display = 'none'; }, 3000);
+    }
+}
+
+// 앱이 켜지고 화면이 다 그려진 후, 2초(2000ms) 뒤에 버벅임 없이 유저 몰래 실행!
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(silentAutoMigrateToImgBB, 6000);
+});
